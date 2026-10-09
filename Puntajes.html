@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resultados Ensayos M1 · IV° Medio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puntajes Ensayos M1 · SSCC IVAB</title>
 <style>
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   body{
-    margin:0;
-    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     background:#eef2f7;color:#0f172a;line-height:1.5;
     -webkit-font-smoothing:antialiased;
+    min-height:100vh;
   }
   .wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
 
-  /* ---------- HEADER ---------- */
+  /* HEADER */
   header{
     background:linear-gradient(135deg,#0b1e46 0%,#1d4ed8 55%,#3b82f6 100%);
     color:#fff;padding:2.5rem 0 3.25rem;
   }
-  header h1{margin:0 0 .4rem;font-size:clamp(1.45rem,3.6vw,2.15rem);letter-spacing:-.02em;font-weight:700;}
+  header h1{margin:0 0 .4rem;font-size:2rem;letter-spacing:-.02em;font-weight:700;}
   header p{margin:0;opacity:.88;font-size:.97rem;max-width:70ch;}
   header .tag{
     display:inline-block;margin-bottom:.85rem;padding:.25rem .7rem;border-radius:999px;
@@ -29,7 +29,7 @@
 
   main{padding-bottom:4rem;}
 
-  /* ---------- STATS ---------- */
+  /* STATS */
   .stats{
     margin-top:-1.9rem;margin-bottom:1.6rem;
     display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;
@@ -43,7 +43,7 @@
   .stat .valor{font-size:1.6rem;font-weight:800;color:#1d4ed8;letter-spacing:-.02em;line-height:1.2;margin-top:.15rem;}
   .stat .sub{font-size:.78rem;color:#94a3b8;}
 
-  /* ---------- CARDS ---------- */
+  /* CARDS */
   .card{
     background:#fff;border-radius:16px;padding:1.5rem 1.5rem 1.35rem;
     box-shadow:0 10px 28px -18px rgba(15,23,42,.4);
@@ -61,7 +61,7 @@
   }
   .desc{margin:.15rem 0 1.1rem;color:#64748b;font-size:.9rem;max-width:90ch;}
 
-  /* ---------- CONTROLES ---------- */
+  /* CONTROLES */
   .controles{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.6rem;}
   .input-wrap{position:relative;flex:1 1 320px;min-width:220px;}
   .input-wrap input{
@@ -92,7 +92,7 @@
   select:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.13);}
   .contador{font-size:.82rem;color:#64748b;margin-bottom:.85rem;}
 
-  /* ---------- TABLAS ---------- */
+  /* TABLAS */
   .tabla-wrap{overflow-x:auto;border-radius:12px;border:1px solid #e8edf4;}
   table{width:100%;border-collapse:collapse;font-size:.9rem;}
   thead th{
@@ -110,7 +110,7 @@
   .nd{color:#cbd5e1;font-weight:600;}
   .vacio{text-align:center;color:#94a3b8;padding:2rem 1rem !important;font-style:italic;}
 
-  /* ---------- BADGES ---------- */
+  /* BADGES */
   .paes{
     display:inline-block;min-width:3.6rem;text-align:center;
     padding:.22rem .55rem;border-radius:999px;font-weight:800;
@@ -133,7 +133,7 @@
   .delta.down{color:#dc2626;}
   .delta.eq{color:#94a3b8;}
 
-  /* ---------- PROMEDIOS ---------- */
+  /* PROMEDIOS */
   .prom-card{
     border:1px solid #e8edf4;border-radius:13px;overflow:hidden;margin-bottom:1.1rem;
   }
@@ -147,7 +147,7 @@
   .fila-general td{background:#f8fafc;font-weight:700;color:#1e3a8a;}
   .nota{font-size:.82rem;color:#64748b;margin:.7rem 0 0;padding-left:.2rem;}
 
-  /* ---------- CONVERSIÓN ---------- */
+  /* CONVERSIÓN */
   details.card{padding:0;overflow:hidden;}
   details.card summary{
     cursor:pointer;padding:1.1rem 1.5rem;font-weight:700;color:#1e3a8a;
@@ -176,6 +176,7 @@
   @media(max-width:640px){
     .card{padding:1.15rem 1rem;}
     header{padding:1.8rem 0 2.6rem;}
+    header h1{font-size:1.5rem;}
     thead th,tbody td{padding:.5rem .55rem;font-size:.78rem;}
     .paes{min-width:3rem;font-size:.78rem;padding:.18rem .4rem;}
   }
@@ -193,10 +194,10 @@
 
 <main class="wrap">
 
-  <!-- ====== ESTADÍSTICAS RÁPIDAS ====== -->
+  <!-- ESTADÍSTICAS -->
   <section class="stats" id="stats"></section>
 
-  <!-- ====== SECCIÓN 1: BÚSQUEDA ====== -->
+  <!-- SECCIÓN 1: BÚSQUEDA -->
   <section class="card" id="sec-busqueda">
     <h2><span class="num">1</span> Búsqueda de puntaje por nombre</h2>
     <p class="desc">Escribe el nombre o apellido de un estudiante para ver sus dos resultados asociados, con su equivalencia en puntaje PAES y la variación entre ambas pruebas.</p>
@@ -237,14 +238,14 @@
     </div>
   </section>
 
-  <!-- ====== SECCIÓN 2: PROMEDIOS ====== -->
+  <!-- SECCIÓN 2: PROMEDIOS -->
   <section class="card" id="sec-promedios">
     <h2><span class="num">2</span> Promedio de curso por prueba</h2>
     <p class="desc">Promedio de respuestas correctas y de puntaje PAES obtenido por cada curso en cada uno de los ensayos, junto con el mejor y el más bajo puntaje del grupo.</p>
     <div id="promedios"></div>
   </section>
 
-  <!-- ====== TABLA DE CONVERSIÓN ====== -->
+  <!-- CONVERSIÓN -->
   <details class="card">
     <summary>Tabla de conversión: respuestas correctas → puntaje PAES</summary>
     <div class="conv-grid" id="tablaConversion"></div>
@@ -255,372 +256,372 @@
 <footer>Panel generado a partir de los archivos de resultados de los ensayos M1 · IV° Medio A y B.</footer>
 
 <script>
-/* =========================================================
-   1. TABLA DE CONVERSIÓN A PUNTAJE PAES
-   ========================================================= */
-const TABLA_PAES = [
-  100,173,196,216,236,255,273,290,305,318,
-  331,345,360,375,389,399,408,417,426,438,
-  452,467,480,490,498,504,511,519,530,543,
-  558,571,582,590,597,603,611,622,635,650,
-  664,676,685,694,704,716,730,746,761,775,
-  789,804,821,840,860,880,903,927,955,986,
-  1000
-];
+(function(){
+  "use strict";
 
-/* =========================================================
-   2. DATOS DE LOS ENSAYOS
-   ========================================================= */
-const ENSAYOS = [
-  {
-    id: 'sep29',
-    titulo: 'Ensayo M1 · 29 de septiembre',
-    corto: '29 sept.',
-    registros: [
-      /* ---- IV° medio A ---- */
-      { ap:'Aguirre',            nom:'Joaquín',          curso:'IV° medio A', c:53 },
-      { ap:'Almeida Puebla',     nom:'María Emilia',     curso:'IV° medio A', c:40 },
-      { ap:'Arancibia Godoy',    nom:'Isidora Ignacia',  curso:'IV° medio A', c:53 },
-      { ap:'Atenas Mollo',       nom:'Gabriela',         curso:'IV° medio A', c:58 },
-      { ap:'Delorme Caro',       nom:'Sofía Elisa',      curso:'IV° medio A', c:60 },
-      { ap:'Gajardo',            nom:'Benjamín',         curso:'IV° medio A', c:55 },
-      { ap:'García',             nom:'Araceli',          curso:'IV° medio A', c:42 },
-      { ap:'González',           nom:'Martina',          curso:'IV° medio A', c:57 },
-      { ap:'Hurtado Celedón',    nom:'Facundo',          curso:'IV° medio A', c:60 },
-      { ap:'Morales Tolra',      nom:'Fernanda Antonia', curso:'IV° medio A', c:43 },
-      { ap:'Parra',              nom:'Alonso',           curso:'IV° medio A', c:40 },
-      { ap:'Peña La Rivera',     nom:'Antonia Paz',      curso:'IV° medio A', c:58 },
-      { ap:'Pizarro Kramm',      nom:'Vicente',          curso:'IV° medio A', c:51 },
-      { ap:'Ramirez Riquelme',   nom:'Magdalena Itzel',  curso:'IV° medio A', c:43 },
-      { ap:'Roth Aguayo',        nom:'Mila Adelaida',    curso:'IV° medio A', c:58 },
-      { ap:'Sáez Vallejo',       nom:'Alex Roberto',     curso:'IV° medio A', c:48 },
-      { ap:'Tessini',            nom:'Florencia',        curso:'IV° medio A', c:52 },
-      { ap:'Valdebenito Abarca', nom:'Manuel',           curso:'IV° medio A', c:45 },
-      /* ---- IV° medio B ---- */
-      { ap:'Álvarez Fernández',  nom:'Margarita Luz',    curso:'IV° medio B', c:57 },
-      { ap:'Bonet Gavidia',      nom:'Matías',           curso:'IV° medio B', c:52 },
-      { ap:'Dominguez Vergara',  nom:'Emilia Victoria',  curso:'IV° medio B', c:55 },
-      { ap:'Garretón Perona',    nom:'Vicente Antonio',  curso:'IV° medio B', c:47 },
-      { ap:'Jara Contreras',     nom:'Matías',           curso:'IV° medio B', c:54 },
-      { ap:'Leiva Larrain',      nom:'Matías Alejandro', curso:'IV° medio B', c:58 },
-      { ap:'Leiva Rojas',        nom:'Martina Fernanda', curso:'IV° medio B', c:54 },
-      { ap:'Méndez Hernández',   nom:'Sebastián',        curso:'IV° medio B', c:49 },
-      { ap:'Merino',             nom:'José Manuel',      curso:'IV° medio B', c:null },
-      { ap:'Rivas Vallejos',     nom:'Antonela Sofía',   curso:'IV° medio B', c:56 },
-      { ap:'Rojas',              nom:'Sepúlveda',        curso:'IV° medio B', c:45 },
-      { ap:'Salgado Medina',     nom:'Alicia Sofía',     curso:'IV° medio B', c:46 }
-    ]
-  },
-  {
-    id: 'oct07',
-    titulo: 'Ensayo M1 · 7 de octubre',
-    corto: '7 oct.',
-    registros: [
-      /* ---- IV° medio A ---- */
-      { ap:'Aguirre',            nom:'Joaquín',          curso:'IV° medio A', c:59 },
-      { ap:'Almeida Puebla',     nom:'María Emilia',     curso:'IV° medio A', c:41 },
-      { ap:'Arancibia Godoy',    nom:'Isidora Ignacia',  curso:'IV° medio A', c:52 },
-      { ap:'Atenas Mollo',       nom:'Gabriela',         curso:'IV° medio A', c:56 },
-      { ap:'Gajardo',            nom:'Benjamín',         curso:'IV° medio A', c:53 },
-      { ap:'Campaña',            nom:'Matilda',          curso:'IV° medio A', c:46 },
-      { ap:'González',           nom:'Martina',          curso:'IV° medio A', c:55 },
-      { ap:'González de Santis', nom:'Tomás Ignacio',    curso:'IV° medio A', c:55 },
-      { ap:'Hurtado Celedón',    nom:'Facundo',          curso:'IV° medio A', c:59 },
-      { ap:'Lavandero Lizama',   nom:'Catalina Paz',     curso:'IV° medio A', c:32 },
-      { ap:'Matilla',            nom:'Olivia',           curso:'IV° medio A', c:52 },
-      { ap:'Moriamez Moyano',    nom:'Magdalena',        curso:'IV° medio A', c:44 },
-      { ap:'Parra',              nom:'Alonso',           curso:'IV° medio A', c:43 },
-      { ap:'Peña La Rivera',     nom:'Antonia Paz',      curso:'IV° medio A', c:59 },
-      { ap:'Pizarro Kramm',      nom:'Vicente',          curso:'IV° medio A', c:51 },
-      { ap:'Ramirez Riquelme',   nom:'Magdalena Itzel',  curso:'IV° medio A', c:57 },
-      { ap:'Roth Aguayo',        nom:'Mila Adelaida',    curso:'IV° medio A', c:60 },
-      { ap:'Sáez Vallejo',       nom:'Alex Roberto',     curso:'IV° medio A', c:52 },
-      { ap:'Tessini',            nom:'Florencia',        curso:'IV° medio A', c:57 },
-      { ap:'Valdebenito Abarca', nom:'Manuel',           curso:'IV° medio A', c:44 },
-      /* ---- IV° medio B ---- */
-      { ap:'Álvarez Fernández',  nom:'Margarita Luz',    curso:'IV° medio B', c:58 },
-      { ap:'Azar Jiménez',       nom:'Joaquín Alonso',   curso:'IV° medio B', c:54 },
-      { ap:'Dominguez Vergara',  nom:'Emilia Victoria',  curso:'IV° medio B', c:51 },
-      { ap:'Garretón Perona',    nom:'Vicente Antonio',  curso:'IV° medio B', c:49 },
-      { ap:'Jara Contreras',     nom:'Matías',           curso:'IV° medio B', c:54 },
-      { ap:'Leiva Rojas',        nom:'Martina Fernanda', curso:'IV° medio B', c:52 },
-      { ap:'Obregón Contreras',  nom:'Gonzalo Cristian', curso:'IV° medio B', c:59 },
-      { ap:'Polloni Farías',     nom:'Gabriel Elián',    curso:'IV° medio B', c:37 },
-      { ap:'Rojas',              nom:'Josefa',           curso:'IV° medio B', c:45 }
-    ]
-  }
-];
-
-/* =========================================================
-   3. UTILIDADES
-   ========================================================= */
-const $ = sel => document.querySelector(sel);
-
-/** Normaliza texto: sin acentos, minúsculas, sin signos. */
-function norm(s){
-  return String(s)
-    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g,' ')
-    .replace(/\s+/g,' ')
-    .trim();
-}
-
-/** Capitaliza palabras escritas en minúsculas o MAYÚSCULAS. */
-function titulo(s){
-  return String(s).split(/\s+/).map(w => {
-    if(!w) return w;
-    if(w === w.toLowerCase() || w === w.toUpperCase()){
-      return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
-    }
-    return w;
-  }).join(' ');
-}
-
-/** Convierte correctas → puntaje PAES (0–60). */
-function paesDe(c){
-  if(c === null || c === undefined || c === '') return null;
-  const i = Math.max(0, Math.min(TABLA_PAES.length - 1, Math.round(c)));
-  return TABLA_PAES[i];
-}
-
-/** Formato numérico chileno. */
-function fmt(n){ return Number(n).toLocaleString('es-CL'); }
-
-/** Clave de identificación: todos los tokens del nombre ordenados. */
-function clave(ap, nom){
-  return norm(ap + ' ' + nom).split(' ').filter(Boolean).sort().join(' ');
-}
-
-/** Badge con color según rango PAES. */
-function badge(p){
-  const clase = p >= 800 ? 'p-alto' : p >= 650 ? 'p-medio-alto' : p >= 500 ? 'p-medio' : 'p-bajo';
-  return '<span class="paes ' + clase + '">' + fmt(p) + '</span>';
-}
-
-/** Variación entre pruebas. */
-function deltaHTML(d){
-  if(d > 0) return '<span class="delta up">▲ +' + d + '</span>';
-  if(d < 0) return '<span class="delta down">▼ ' + d + '</span>';
-  return '<span class="delta eq">= 0</span>';
-}
-
-/* =========================================================
-   4. CONSOLIDAR ESTUDIANTES (unifica ambos ensayos)
-   ========================================================= */
-const ESTUDIANTES = (() => {
-  const mapa = new Map();
-
-  ENSAYOS.forEach(ens => {
-    ens.registros.forEach(r => {
-      const k = clave(r.ap, r.nom);
-      let est = mapa.get(k);
-
-      if(!est){
-        est = {
-          key: k,
-          nombre: titulo(r.ap) + ', ' + titulo(r.nom),
-          busqueda: norm(r.ap + ' ' + r.nom),
-          curso: r.curso,
-          resultados: {}
-        };
-        mapa.set(k, est);
-      }
-      est.resultados[ens.id] = { correctas: r.c, paes: paesDe(r.c) };
-    });
-  });
-
-  return [...mapa.values()].sort((a, b) =>
-    a.curso.localeCompare(b.curso, 'es') || a.nombre.localeCompare(b.nombre, 'es')
-  );
-})();
-
-/* =========================================================
-   5. RENDER — ESTADÍSTICAS RÁPIDAS
-   ========================================================= */
-function renderStats(){
-  const conAmbas = ESTUDIANTES.filter(e =>
-    e.resultados.sep29 && e.resultados.sep29.paes != null &&
-    e.resultados.oct07 && e.resultados.oct07.paes != null
-  ).length;
-
-  const prom = id => {
-    const v = ESTUDIANTES.map(e => e.resultados[id]).filter(r => r && r.paes != null).map(r => r.paes);
-    return v.length ? Math.round(v.reduce((a,b)=>a+b,0) / v.length) : null;
-  };
-
-  const datos = [
-    { label:'Estudiantes registrados', valor: ESTUDIANTES.length, sub:'en ambos ensayos' },
-    { label:'Con las dos pruebas',     valor: conAmbas,           sub:'resultados comparables' },
-    { label:'Prom. PAES 29 sept.',     valor: fmt(prom('sep29')), sub:'todos los cursos' },
-    { label:'Prom. PAES 7 oct.',       valor: fmt(prom('oct07')), sub:'todos los cursos' }
+  /* ===== TABLA PAES ===== */
+  var TABLA_PAES = [
+    100,173,196,216,236,255,273,290,305,318,
+    331,345,360,375,389,399,408,417,426,438,
+    452,467,480,490,498,504,511,519,530,543,
+    558,571,582,590,597,603,611,622,635,650,
+    664,676,685,694,704,716,730,746,761,775,
+    789,804,821,840,860,880,903,927,955,986,
+    1000
   ];
 
-  $('#stats').innerHTML = datos.map(d =>
-    '<div class="stat"><div class="label">' + d.label + '</div>' +
-    '<div class="valor">' + d.valor + '</div>' +
-    '<div class="sub">' + d.sub + '</div></div>'
-  ).join('');
-}
+  /* ===== DATOS ===== */
+  var ENSAYOS = [
+    {
+      id: "sep29",
+      titulo: "Ensayo M1 · 29 de septiembre",
+      registros: [
+        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:53},
+        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:40},
+        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:53},
+        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:58},
+        {ap:"Delorme Caro",nom:"Sofía Elisa",curso:"IV° medio A",c:60},
+        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:55},
+        {ap:"García",nom:"Araceli",curso:"IV° medio A",c:42},
+        {ap:"González",nom:"Martina",curso:"IV° medio A",c:57},
+        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:60},
+        {ap:"Morales Tolra",nom:"Fernanda Antonia",curso:"IV° medio A",c:43},
+        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:40},
+        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:58},
+        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51},
+        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:43},
+        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:58},
+        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:48},
+        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:52},
+        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:45},
+        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:57},
+        {ap:"Bonet Gavidia",nom:"Matías",curso:"IV° medio B",c:52},
+        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:55},
+        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:47},
+        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54},
+        {ap:"Leiva Larrain",nom:"Matías Alejandro",curso:"IV° medio B",c:58},
+        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:54},
+        {ap:"Méndez Hernández",nom:"Sebastián",curso:"IV° medio B",c:49},
+        {ap:"Merino",nom:"José Manuel",curso:"IV° medio B",c:null},
+        {ap:"Rivas Vallejos",nom:"Antonela Sofía",curso:"IV° medio B",c:56},
+        {ap:"Rojas",nom:"Sepúlveda",curso:"IV° medio B",c:45},
+        {ap:"Salgado Medina",nom:"Alicia Sofía",curso:"IV° medio B",c:46}
+      ]
+    },
+    {
+      id: "oct07",
+      titulo: "Ensayo M1 · 7 de octubre",
+      registros: [
+        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:59},
+        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:41},
+        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:52},
+        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:56},
+        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:53},
+        {ap:"Campaña",nom:"Matilda",curso:"IV° medio A",c:46},
+        {ap:"González",nom:"Martina",curso:"IV° medio A",c:55},
+        {ap:"González de Santis",nom:"Tomás Ignacio",curso:"IV° medio A",c:55},
+        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:59},
+        {ap:"Lavandero Lizama",nom:"Catalina Paz",curso:"IV° medio A",c:32},
+        {ap:"Matilla",nom:"Olivia",curso:"IV° medio A",c:52},
+        {ap:"Moriamez Moyano",nom:"Magdalena",curso:"IV° medio A",c:44},
+        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:43},
+        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:59},
+        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51},
+        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:57},
+        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:60},
+        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:52},
+        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:57},
+        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:44},
+        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:58},
+        {ap:"Azar Jiménez",nom:"Joaquín Alonso",curso:"IV° medio B",c:54},
+        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:51},
+        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:49},
+        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54},
+        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:52},
+        {ap:"Obregón Contreras",nom:"Gonzalo Cristian",curso:"IV° medio B",c:59},
+        {ap:"Polloni Farías",nom:"Gabriel Elián",curso:"IV° medio B",c:37},
+        {ap:"Rojas",nom:"Josefa",curso:"IV° medio B",c:45}
+      ]
+    }
+  ];
 
-/* =========================================================
-   6. RENDER — SECCIÓN 1: BÚSQUEDA POR NOMBRE
-   ========================================================= */
-function listaFiltrada(){
-  const q = norm($('#busqueda').value);
-  const curso = $('#filtroCurso').value;
-  const tokens = q.split(' ').filter(Boolean);
-
-  return ESTUDIANTES.filter(e => {
-    if(curso && e.curso !== curso) return false;
-    if(!tokens.length) return true;
-    return tokens.every(t => e.busqueda.includes(t));
-  });
-}
-
-function renderTabla(){
-  const lista = listaFiltrada();
-  const tb = $('#tbodyResultados');
-  const cont = $('#contador');
-
-  cont.textContent = (lista.length === ESTUDIANTES.length)
-    ? 'Mostrando los ' + lista.length + ' estudiantes registrados.'
-    : lista.length + ' ' + (lista.length === 1 ? 'estudiante encontrado' : 'estudiantes encontrados') + '.';
-
-  if(!lista.length){
-    tb.innerHTML = '<tr><td colspan="7" class="vacio">No se encontraron estudiantes con ese nombre.</td></tr>';
-    return;
+  /* ===== UTILIDADES ===== */
+  function norm(s){
+    return String(s == null ? "" : s)
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g," ")
+      .replace(/\s+/g," ")
+      .trim();
   }
 
-  tb.innerHTML = lista.map(e => {
-    const r1 = e.resultados.sep29;
-    const r2 = e.resultados.oct07;
+  function titulo(s){
+    return String(s).split(/\s+/).map(function(w){
+      if(!w) return w;
+      if(w === w.toLowerCase() || w === w.toUpperCase()){
+        return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      }
+      return w;
+    }).join(" ");
+  }
 
-    const d = (r1 && r2 && r1.paes != null && r2.paes != null)
-      ? r2.paes - r1.paes : null;
+  function paesDe(c){
+    if(c === null || c === undefined || c === "") return null;
+    var i = Math.max(0, Math.min(TABLA_PAES.length - 1, Math.round(c)));
+    return TABLA_PAES[i];
+  }
 
-    const claseCurso = /A$/.test(e.curso) ? '' : ' b';
+  function fmt(n){
+    return Number(n).toLocaleString("es-CL");
+  }
 
-    return '<tr>' +
-      '<td class="nombre">' + e.nombre + '</td>' +
-      '<td><span class="curso' + claseCurso + '">' + e.curso + '</span></td>' +
-      '<td class="num">' + (r1 && r1.correctas != null ? r1.correctas : '<span class="nd">—</span>') + '</td>' +
-      '<td class="num">' + (r1 && r1.paes != null ? badge(r1.paes) : '<span class="nd">—</span>') + '</td>' +
-      '<td class="num">' + (r2 && r2.correctas != null ? r2.correctas : '<span class="nd">—</span>') + '</td>' +
-      '<td class="num">' + (r2 && r2.paes != null ? badge(r2.paes) : '<span class="nd">—</span>') + '</td>' +
-      '<td class="num">' + (d === null ? '<span class="nd">—</span>' : deltaHTML(d)) + '</td>' +
-    '</tr>';
-  }).join('');
-}
+  function clave(ap, nom){
+    return norm(ap + " " + nom).split(" ").filter(Boolean).sort().join(" ");
+  }
 
-/* =========================================================
-   7. RENDER — SECCIÓN 2: PROMEDIOS POR CURSO
-   ========================================================= */
-function calcularGrupo(curso, ensayoId){
-  const vals = ESTUDIANTES
-    .filter(e => !curso || e.curso === curso)
-    .map(e => e.resultados[ensayoId])
-    .filter(r => r && r.correctas != null);
+  function badge(p){
+    var clase = p >= 800 ? "p-alto" : p >= 650 ? "p-medio-alto" : p >= 500 ? "p-medio" : "p-bajo";
+    return '<span class="paes ' + clase + '">' + fmt(p) + "</span>";
+  }
 
-  if(!vals.length) return { n:0, promC:null, promP:null, max:null, min:null };
+  function deltaHTML(d){
+    if(d > 0) return '<span class="delta up">▲ +' + d + "</span>";
+    if(d < 0) return '<span class="delta down">▼ ' + d + "</span>";
+    return '<span class="delta eq">= 0</span>';
+  }
 
-  const cs = vals.map(v => v.correctas);
-  const ps = vals.map(v => v.paes);
+  /* ===== CONSOLIDAR ESTUDIANTES ===== */
+  var ESTUDIANTES = (function(){
+    var mapa = {};
+    var orden = [];
 
-  return {
-    n: vals.length,
-    promC: cs.reduce((a,b)=>a+b,0) / cs.length,
-    promP: ps.reduce((a,b)=>a+b,0) / ps.length,
-    max: Math.max(...ps),
-    min: Math.min(...ps)
-  };
-}
+    ENSAYOS.forEach(function(ens){
+      ens.registros.forEach(function(r){
+        var k = clave(r.ap, r.nom);
+        if(!mapa[k]){
+          mapa[k] = {
+            key: k,
+            nombre: titulo(r.ap) + ", " + titulo(r.nom),
+            busqueda: norm(r.ap + " " + r.nom),
+            curso: r.curso,
+            resultados: {}
+          };
+          orden.push(k);
+        }
+        mapa[k].resultados[ens.id] = { correctas: r.c, paes: paesDe(r.c) };
+      });
+    });
 
-function renderPromedios(){
-  const cursos = [...new Set(ESTUDIANTES.map(e => e.curso))].sort();
+    return orden.map(function(k){ return mapa[k]; }).sort(function(a,b){
+      return a.curso.localeCompare(b.curso, "es") || a.nombre.localeCompare(b.nombre, "es");
+    });
+  })();
 
-  $('#promedios').innerHTML = ENSAYOS.map((ens, idx) => {
-    const filas = cursos.map(c => ({ curso: c, ...calcularGrupo(c, ens.id) }));
-    filas.push({ curso: 'General', ...calcularGrupo(null, ens.id) });
+  /* ===== RENDER STATS ===== */
+  function renderStats(){
+    var conAmbas = ESTUDIANTES.filter(function(e){
+      return e.resultados.sep29 && e.resultados.sep29.paes != null &&
+             e.resultados.oct07 && e.resultados.oct07.paes != null;
+    }).length;
 
-    const cuerpo = filas.map(f =>
-      '<tr class="' + (f.curso === 'General' ? 'fila-general' : '') + '">' +
-        '<td>' + f.curso + '</td>' +
-        '<td class="num">' + f.n + '</td>' +
-        '<td class="num">' + (f.promC == null ? '—' : f.promC.toFixed(1)) + '</td>' +
-        '<td class="num">' + (f.promP == null ? '—' : badge(Math.round(f.promP))) + '</td>' +
-        '<td class="num">' + (f.max  == null ? '—' : fmt(f.max)) + '</td>' +
-        '<td class="num">' + (f.min  == null ? '—' : fmt(f.min)) + '</td>' +
-      '</tr>'
-    ).join('');
-
-    // Nota de variación respecto al ensayo anterior
-    let nota = '';
-    if(idx > 0){
-      const prev = ENSAYOS[idx - 1];
-      const partes = cursos.map(c => {
-        const a = calcularGrupo(c, prev.id).promP;
-        const b = calcularGrupo(c, ens.id).promP;
-        if(a == null || b == null) return null;
-        const d = Math.round(b - a);
-        const signo = d > 0 ? '+' : '';
-        return c.replace('IV° medio ','') + ': ' + signo + d + ' pts';
-      }).filter(Boolean);
-      if(partes.length) nota = '<p class="nota">Variación de promedio PAES respecto al ensayo anterior → ' + partes.join(' · ') + '</p>';
+    function prom(id){
+      var v = ESTUDIANTES.map(function(e){ return e.resultados[id]; })
+        .filter(function(r){ return r && r.paes != null; })
+        .map(function(r){ return r.paes; });
+      if(!v.length) return null;
+      return Math.round(v.reduce(function(a,b){ return a+b; },0) / v.length);
     }
 
-    return '<div class="prom-card">' +
-      '<h3>' + ens.titulo + '</h3>' +
-      '<table>' +
-        '<thead><tr>' +
-          '<th>Curso</th><th class="num">Alumnos</th><th class="num">Prom. correctas</th>' +
-          '<th class="num">Prom. PAES</th><th class="num">Mejor</th><th class="num">Más bajo</th>' +
-        '</tr></thead>' +
-        '<tbody>' + cuerpo + '</tbody>' +
-      '</table>' +
-      nota +
-    '</div>';
-  }).join('');
-}
+    var datos = [
+      {label:"Estudiantes registrados", valor:ESTUDIANTES.length, sub:"en ambos ensayos"},
+      {label:"Con las dos pruebas", valor:conAmbas, sub:"resultados comparables"},
+      {label:"Prom. PAES 29 sept.", valor:fmt(prom("sep29")), sub:"todos los cursos"},
+      {label:"Prom. PAES 7 oct.", valor:fmt(prom("oct07")), sub:"todos los cursos"}
+    ];
 
-/* =========================================================
-   8. RENDER — TABLA DE CONVERSIÓN
-   ========================================================= */
-function renderConversion(){
-  $('#tablaConversion').innerHTML = TABLA_PAES.map((p, i) =>
-    '<div class="conv-item"><span class="conv-c">' + i + ' correctas</span>' +
-    '<span class="conv-p">' + fmt(p) + '</span></div>'
-  ).join('');
-}
+    document.getElementById("stats").innerHTML = datos.map(function(d){
+      return '<div class="stat">' +
+        '<div class="label">' + d.label + "</div>" +
+        '<div class="valor">' + d.valor + "</div>" +
+        '<div class="sub">' + d.sub + "</div>" +
+      "</div>";
+    }).join("");
+  }
 
-/* =========================================================
-   9. EVENTOS E INICIALIZACIÓN
-   ========================================================= */
-function init(){
-  renderStats();
-  renderPromedios();
-  renderConversion();
-  renderTabla();
+  /* ===== RENDER BÚSQUEDA ===== */
+  function listaFiltrada(){
+    var q = norm(document.getElementById("busqueda").value);
+    var curso = document.getElementById("filtroCurso").value;
+    var tokens = q.split(" ").filter(Boolean);
 
-  const input = $('#busqueda');
-  const limpiar = $('#limpiar');
+    return ESTUDIANTES.filter(function(e){
+      if(curso && e.curso !== curso) return false;
+      if(!tokens.length) return true;
+      for(var i = 0; i < tokens.length; i++){
+        if(e.busqueda.indexOf(tokens[i]) === -1) return false;
+      }
+      return true;
+    });
+  }
 
-  input.addEventListener('input', () => {
-    limpiar.classList.toggle('visible', input.value.length > 0);
+  function renderTabla(){
+    var lista = listaFiltrada();
+    var tb = document.getElementById("tbodyResultados");
+    var cont = document.getElementById("contador");
+
+    cont.textContent = (lista.length === ESTUDIANTES.length)
+      ? "Mostrando los " + lista.length + " estudiantes registrados."
+      : lista.length + " " + (lista.length === 1 ? "estudiante encontrado" : "estudiantes encontrados") + ".";
+
+    if(!lista.length){
+      tb.innerHTML = '<tr><td colspan="7" class="vacio">No se encontraron estudiantes con ese nombre.</td></tr>';
+      return;
+    }
+
+    tb.innerHTML = lista.map(function(e){
+      var r1 = e.resultados.sep29;
+      var r2 = e.resultados.oct07;
+
+      var d = (r1 && r2 && r1.paes != null && r2.paes != null)
+        ? r2.paes - r1.paes : null;
+
+      var claseCurso = /A$/.test(e.curso) ? "" : " b";
+
+      return "<tr>" +
+        '<td class="nombre">' + e.nombre + "</td>" +
+        '<td><span class="curso' + claseCurso + '">' + e.curso + "</span></td>" +
+        '<td class="num">' + (r1 && r1.correctas != null ? r1.correctas : '<span class="nd">—</span>') + "</td>" +
+        '<td class="num">' + (r1 && r1.paes != null ? badge(r1.paes) : '<span class="nd">—</span>') + "</td>" +
+        '<td class="num">' + (r2 && r2.correctas != null ? r2.correctas : '<span class="nd">—</span>') + "</td>" +
+        '<td class="num">' + (r2 && r2.paes != null ? badge(r2.paes) : '<span class="nd">—</span>') + "</td>" +
+        '<td class="num">' + (d === null ? '<span class="nd">—</span>' : deltaHTML(d)) + "</td>" +
+      "</tr>";
+    }).join("");
+  }
+
+  /* ===== RENDER PROMEDIOS ===== */
+  function calcularGrupo(curso, ensayoId){
+    var vals = ESTUDIANTES.filter(function(e){
+      return !curso || e.curso === curso;
+    }).map(function(e){
+      return e.resultados[ensayoId];
+    }).filter(function(r){
+      return r && r.correctas != null;
+    });
+
+    if(!vals.length) return {n:0, promC:null, promP:null, max:null, min:null};
+
+    var cs = vals.map(function(v){ return v.correctas; });
+    var ps = vals.map(function(v){ return v.paes; });
+
+    return {
+      n: vals.length,
+      promC: cs.reduce(function(a,b){ return a+b; },0) / cs.length,
+      promP: ps.reduce(function(a,b){ return a+b; },0) / ps.length,
+      max: Math.max.apply(null, ps),
+      min: Math.min.apply(null, ps)
+    };
+  }
+
+  function renderPromedios(){
+    var cursosMap = {};
+    ESTUDIANTES.forEach(function(e){ cursosMap[e.curso] = true; });
+    var cursos = Object.keys(cursosMap).sort();
+
+    document.getElementById("promedios").innerHTML = ENSAYOS.map(function(ens, idx){
+      var filas = cursos.map(function(c){
+        var g = calcularGrupo(c, ens.id);
+        g.curso = c;
+        return g;
+      });
+      var gen = calcularGrupo(null, ens.id);
+      gen.curso = "General";
+      filas.push(gen);
+
+      var cuerpo = filas.map(function(f){
+        var clase = f.curso === "General" ? "fila-general" : "";
+        return '<tr class="' + clase + '">' +
+          "<td>" + f.curso + "</td>" +
+          '<td class="num">' + f.n + "</td>" +
+          '<td class="num">' + (f.promC == null ? "—" : f.promC.toFixed(1)) + "</td>" +
+          '<td class="num">' + (f.promP == null ? "—" : badge(Math.round(f.promP))) + "</td>" +
+          '<td class="num">' + (f.max == null ? "—" : fmt(f.max)) + "</td>" +
+          '<td class="num">' + (f.min == null ? "—" : fmt(f.min)) + "</td>" +
+        "</tr>";
+      }).join("");
+
+      var nota = "";
+      if(idx > 0){
+        var prev = ENSAYOS[idx - 1];
+        var partes = cursos.map(function(c){
+          var a = calcularGrupo(c, prev.id).promP;
+          var b = calcularGrupo(c, ens.id).promP;
+          if(a == null || b == null) return null;
+          var d = Math.round(b - a);
+          var signo = d > 0 ? "+" : "";
+          return c.replace("IV° medio ", "") + ": " + signo + d + " pts";
+        }).filter(Boolean);
+        if(partes.length){
+          nota = '<p class="nota">Variación de promedio PAES respecto al ensayo anterior → ' + partes.join(" · ") + "</p>";
+        }
+      }
+
+      return '<div class="prom-card">' +
+        "<h3>" + ens.titulo + "</h3>" +
+        "<table>" +
+          "<thead><tr>" +
+            "<th>Curso</th><th class=\"num\">Alumnos</th><th class=\"num\">Prom. correctas</th>" +
+            "<th class=\"num\">Prom. PAES</th><th class=\"num\">Mejor</th><th class=\"num\">Más bajo</th>" +
+          "</tr></thead>" +
+          "<tbody>" + cuerpo + "</tbody>" +
+        "</table>" +
+        nota +
+      "</div>";
+    }).join("");
+  }
+
+  /* ===== RENDER CONVERSIÓN ===== */
+  function renderConversion(){
+    document.getElementById("tablaConversion").innerHTML = TABLA_PAES.map(function(p, i){
+      return '<div class="conv-item">' +
+        '<span class="conv-c">' + i + " correctas</span>" +
+        '<span class="conv-p">' + fmt(p) + "</span>" +
+      "</div>";
+    }).join("");
+  }
+
+  /* ===== INIT ===== */
+  function init(){
+    renderStats();
+    renderPromedios();
+    renderConversion();
     renderTabla();
-  });
 
-  limpiar.addEventListener('click', () => {
-    input.value = '';
-    limpiar.classList.remove('visible');
-    input.focus();
-    renderTabla();
-  });
+    var input = document.getElementById("busqueda");
+    var limpiar = document.getElementById("limpiar");
 
-  $('#filtroCurso').addEventListener('change', renderTabla);
-}
+    input.addEventListener("input", function(){
+      if(input.value.length > 0) limpiar.classList.add("visible");
+      else limpiar.classList.remove("visible");
+      renderTabla();
+    });
 
-document.addEventListener('DOMContentLoaded', init);
+    limpiar.addEventListener("click", function(){
+      input.value = "";
+      limpiar.classList.remove("visible");
+      input.focus();
+      renderTabla();
+    });
+
+    document.getElementById("filtroCurso").addEventListener("change", renderTabla);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
 </script>
 </body>
 </html>
