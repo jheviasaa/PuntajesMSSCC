@@ -3,263 +3,719 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puntajes Ensayos M1 · SSCC IVAB</title>
+<title>Ensayos M1 · Colegio SSCC Providencia</title>
 <style>
+  :root{
+    --navy-900:#0F1E3D;
+    --navy-800:#152A52;
+    --navy-700:#1B2A4A;
+    --navy-600:#2C4270;
+    --navy-500:#3D5490;
+    --navy-100:#E4E9F2;
+    --red-700:#A00D24;
+    --red-600:#C8102E;
+    --red-500:#E01E3C;
+    --red-100:#FDE8EC;
+    --amber-100:#FEF3C7;
+    --amber-700:#B45309;
+    --green-100:#DCFCE7;
+    --green-700:#15803D;
+    --slate-50:#F8FAFC;
+    --slate-100:#F1F5F9;
+    --slate-200:#E2E8F0;
+    --slate-300:#CBD5E1;
+    --slate-400:#94A3B8;
+    --slate-500:#64748B;
+    --slate-600:#475569;
+    --slate-900:#0F172A;
+    --bg:#EEF2F7;
+  }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    background:#eef2f7;color:#0f172a;line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh;
+    background:var(--bg);color:var(--slate-900);line-height:1.5;
+    -webkit-font-smoothing:antialiased;min-height:100vh;
   }
   .wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem;}
+  .view{display:none;}
+  .view.active{display:block;}
 
-  /* HEADER */
-  header{
-    background:linear-gradient(135deg,#0b1e46 0%,#1d4ed8 55%,#3b82f6 100%);
-    color:#fff;padding:2.5rem 0 3.25rem;
+  /* ============ LANDING ============ */
+  #landing{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eeeef0 0%,#d4d8df 55%,#A00D24 120%);
+    display:flex;align-items:center;justify-content:center;padding:2rem 1.25rem;
+    position:relative;overflow:hidden;
   }
-  header h1{margin:0 0 .4rem;font-size:2rem;letter-spacing:-.02em;font-weight:700;}
-  header p{margin:0;opacity:.88;font-size:.97rem;max-width:70ch;}
-  header .tag{
-    display:inline-block;margin-bottom:.85rem;padding:.25rem .7rem;border-radius:999px;
+  #landing::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 15%, rgba(200,16,46,.28) 0%, transparent 55%);
+    pointer-events:none;
+  }
+  #landing.active{display:flex;}
+  .landing-inner{max-width:960px;width:100%;text-align:center;color:#fff;position:relative;z-index:1;}
+  .logo-185{
+    width:clamp(140px,22vw,210px);height:auto;display:block;margin:0 auto 1.6rem;
+    filter:drop-shadow(0 12px 30px rgba(0,0,0,.5));
+  }
+  .landing-inner .tag{
+    display:inline-block;margin-bottom:1rem;padding:.3rem .85rem;border-radius:999px;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;
+  }
+  .landing-inner h1{font-size:clamp(1.6rem,4.5vw,2.6rem);letter-spacing:-.02em;font-weight:800;margin-bottom:.6rem;}
+  .landing-inner p{opacity:.9;font-size:1rem;margin-bottom:2.5rem;max-width:60ch;margin-left:auto;margin-right:auto;}
+  .landing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;max-width:720px;margin:0 auto;}
+  .rol-card{
+    border:none;cursor:pointer;font-family:inherit;text-align:left;
+    background:rgba(255,255,255,.98);color:var(--slate-900);border-radius:20px;
+    padding:1.9rem 1.6rem 1.7rem;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.15);
+    transition:transform .2s, box-shadow .2s;
+    display:flex;flex-direction:column;gap:.7rem;position:relative;overflow:hidden;
+  }
+  .rol-card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -20px rgba(0,0,0,.65), 0 0 0 1px rgba(255,255,255,.25);}
+  .rol-card:active{transform:translateY(-2px);}
+  .rol-card .icono{width:3.2rem;height:3.2rem;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:.3rem;}
+  .rol-card.docente .icono{background:linear-gradient(135deg,var(--navy-700),var(--navy-600));color:#fff;}
+  .rol-card.estudiante .icono{background:linear-gradient(135deg,var(--red-700),var(--red-500));color:#fff;}
+  .rol-card h2{font-size:1.3rem;letter-spacing:-.01em;font-weight:800;}
+  .rol-card p{font-size:.9rem;color:var(--slate-500);line-height:1.45;}
+  .rol-card .flecha{margin-top:.4rem;font-size:.85rem;font-weight:700;color:var(--navy-700);display:flex;align-items:center;gap:.35rem;}
+  .rol-card.estudiante .flecha{color:var(--red-600);}
+  .rol-card .lock-badge{
+    position:absolute;top:1rem;right:1rem;
+    background:var(--navy-100);color:var(--navy-700);
+    font-size:.68rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    padding:.22rem .55rem;border-radius:999px;
+  }
+
+  /* ============ LOGIN ============ */
+  #view-login{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eeeef0 0%,#d4d8df 55%,#A00D24 120%);
+    display:flex;align-items:center;justify-content:center;
+    padding:2rem 1.25rem;position:relative;overflow:hidden;
+  }
+  #view-login::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 15% 85%, rgba(27,42,74,.35) 0%, transparent 55%);
+    pointer-events:none;
+  }
+  #view-login.active{display:flex;}
+  .login-topbar{
+    position:absolute;top:1.5rem;left:1.5rem;z-index:2;
+  }
+  .login-card{
+    background:#fff;border-radius:22px;padding:2.2rem 2rem 2rem;
+    box-shadow:0 30px 60px -25px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.15);
+    max-width:440px;width:100%;position:relative;z-index:1;
+    animation:aparecer .35s ease-out;
+  }
+  @keyframes aparecer{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .login-logo{
+    width:4.2rem;height:4.2rem;object-fit:contain;display:block;margin:0 auto .9rem;
+  }
+  .login-card h1{
+    font-size:1.4rem;font-weight:800;text-align:center;color:var(--navy-700);
+    letter-spacing:-.01em;margin-bottom:.35rem;
+  }
+  .login-card > p{
+    font-size:.88rem;color:var(--slate-500);text-align:center;
+    margin-bottom:1.5rem;line-height:1.45;
+  }
+  .field{display:block;margin-bottom:1rem;}
+  .field label{
+    display:block;font-size:.75rem;text-transform:uppercase;
+    letter-spacing:.07em;font-weight:800;color:var(--slate-600);
+    margin-bottom:.4rem;
+  }
+  .field input{
+    width:100%;padding:.85rem 1rem;font-size:1rem;
+    border:1.5px solid var(--slate-300);border-radius:12px;
+    background:var(--slate-50);color:var(--slate-900);
+    transition:.15s;font-family:inherit;
+  }
+  .field input:focus{
+    outline:none;border-color:var(--navy-700);background:#fff;
+    box-shadow:0 0 0 4px rgba(27,42,74,.13);
+  }
+  .field.pass input{
+    font-family:"SF Mono",Menlo,Consolas,monospace;
+    letter-spacing:.5em;font-size:1.15rem;text-align:center;
+    padding:.85rem 1rem;
+  }
+  .btn-login{
+    width:100%;padding:.9rem 1.4rem;font-family:inherit;font-size:.98rem;font-weight:700;
+    background:linear-gradient(135deg,var(--navy-700),var(--navy-600));
+    color:#fff;border:none;border-radius:12px;cursor:pointer;
+    transition:.15s;letter-spacing:.01em;
+    box-shadow:0 8px 20px -8px rgba(27,42,74,.65);
+    margin-top:.4rem;
+  }
+  .btn-login:hover{transform:translateY(-1px);box-shadow:0 12px 26px -10px rgba(27,42,74,.7);}
+  .btn-login:active{transform:translateY(0);}
+  .login-hint{
+    font-size:.75rem;color:var(--slate-400);text-align:center;
+    margin-top:1rem;line-height:1.4;
+  }
+  .login-hint b{color:var(--slate-600);}
+  #login-msg{margin-top:1rem;}
+
+  /* ============ HEADERS ============ */
+  .view-header{
+    background:linear-gradient(135deg,#0F1E3D 0%,#1B2A4A 60%,#A00D24 130%);
+    color:#fff;padding:1.6rem 0 2.6rem;
+  }
+  .view-header .top-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;flex-wrap:wrap;}
+  .btn-volver{
+    display:inline-flex;align-items:center;gap:.4rem;
+    background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.3);
+    padding:.5rem .95rem;border-radius:10px;font-family:inherit;font-size:.86rem;
+    font-weight:600;cursor:pointer;transition:.15s;
+  }
+  .btn-volver:hover{background:rgba(255,255,255,.28);}
+  .view-header h1{margin:0 0 .35rem;font-size:clamp(1.35rem,3.2vw,1.9rem);letter-spacing:-.02em;font-weight:700;}
+  .view-header p{margin:0;opacity:.88;font-size:.92rem;max-width:70ch;}
+  .user-tag{
+    display:inline-flex;align-items:center;gap:.5rem;
     background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);
-    font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+    padding:.35rem .8rem;border-radius:999px;font-size:.78rem;font-weight:600;
   }
+  .user-tag b{font-weight:800;}
 
   main{padding-bottom:4rem;}
 
-  /* STATS */
-  .stats{
-    margin-top:-1.9rem;margin-bottom:1.6rem;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;
-  }
-  .stat{
-    background:#fff;border-radius:14px;padding:1rem 1.15rem;
-    box-shadow:0 8px 22px -12px rgba(15,23,42,.35);
-    border:1px solid #e2e8f0;
-  }
-  .stat .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:#64748b;font-weight:700;}
-  .stat .valor{font-size:1.6rem;font-weight:800;color:#1d4ed8;letter-spacing:-.02em;line-height:1.2;margin-top:.15rem;}
-  .stat .sub{font-size:.78rem;color:#94a3b8;}
+  .stats{margin-top:-1.9rem;margin-bottom:1.6rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;}
+  .stat{background:#fff;border-radius:14px;padding:1rem 1.15rem;box-shadow:0 8px 22px -12px rgba(15,23,42,.35);border:1px solid var(--slate-200);}
+  .stat .label{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--slate-500);font-weight:700;}
+  .stat .valor{font-size:1.6rem;font-weight:800;color:var(--navy-700);letter-spacing:-.02em;line-height:1.2;margin-top:.15rem;}
+  .stat .sub{font-size:.78rem;color:var(--slate-400);}
 
-  /* CARDS */
-  .card{
-    background:#fff;border-radius:16px;padding:1.5rem 1.5rem 1.35rem;
-    box-shadow:0 10px 28px -18px rgba(15,23,42,.4);
-    border:1px solid #e2e8f0;margin-bottom:1.6rem;
+  .tabs{
+    display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem;
+    padding:.35rem;background:var(--slate-100);border-radius:14px;border:1px solid var(--slate-200);
   }
-  .card h2{
-    margin:0 0 .35rem;font-size:1.2rem;display:flex;align-items:center;gap:.6rem;
-    letter-spacing:-.01em;
+  .tab-btn{
+    flex:1 1 auto;min-width:150px;padding:.75rem 1rem;border:none;background:transparent;
+    border-radius:10px;font-family:inherit;font-size:.88rem;font-weight:700;
+    color:var(--slate-600);cursor:pointer;transition:.15s;letter-spacing:-.01em;
   }
+  .tab-btn:hover{background:var(--slate-200);color:var(--slate-900);}
+  .tab-btn.active{background:#fff;color:var(--navy-700);box-shadow:0 4px 12px -4px rgba(15,23,42,.18);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;animation:aparecer .3s ease-out;}
+
+  .card{background:#fff;border-radius:16px;padding:1.5rem 1.5rem 1.35rem;box-shadow:0 10px 28px -18px rgba(15,23,42,.4);border:1px solid var(--slate-200);margin-bottom:1.6rem;position:relative;}
+  .card h2{margin:0 0 .35rem;font-size:1.2rem;display:flex;align-items:center;gap:.6rem;letter-spacing:-.01em;}
   .card h2 .num{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:1.75rem;height:1.75rem;border-radius:9px;flex:0 0 auto;
-    background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;
+    border-radius:9px;flex:0 0 auto;background:linear-gradient(135deg,var(--navy-700),var(--navy-600));color:#fff;
     font-size:.9rem;font-weight:700;
   }
-  .desc{margin:.15rem 0 1.1rem;color:#64748b;font-size:.9rem;max-width:90ch;}
+  .desc{margin:.15rem 0 1.1rem;color:var(--slate-500);font-size:.9rem;max-width:90ch;}
 
-  /* CONTROLES */
+  .card.with-logo{padding-top:1.6rem;}
+  .card.with-logo > h2{padding-left:3.4rem;min-height:2.5rem;}
+  .card-corner-logo{
+    position:absolute;top:1.35rem;left:1.35rem;
+    width:2.5rem;height:2.5rem;object-fit:contain;
+    z-index:1;pointer-events:none;
+    filter:drop-shadow(0 2px 4px rgba(15,23,42,.08));
+  }
+  .stats-block,.canvas-wrap{position:relative;}
+  .stats-block.with-logo,.canvas-wrap.with-logo{padding-top:1.6rem;}
+  .stats-block.with-logo > h3{padding-left:3.4rem;min-height:2.5rem;}
+  .canvas-wrap.with-logo > h3{padding-left:3.4rem;min-height:2.5rem;}
+  details.card.with-logo{padding:0;}
+  details.card.with-logo > summary{padding-left:4.5rem;position:relative;}
+  details.card.with-logo > summary::after{
+    content:"";position:absolute;top:50%;left:1.35rem;
+    width:2.5rem;height:2.5rem;transform:translateY(-50%);
+    background:url('logo-colegio.jpg') center/contain no-repeat;
+    pointer-events:none;
+  }
+
   .controles{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.6rem;}
   .input-wrap{position:relative;flex:1 1 320px;min-width:220px;}
   .input-wrap input{
     width:100%;padding:.72rem 2.4rem .72rem 2.5rem;font-size:.95rem;
-    border:1.5px solid #cbd5e1;border-radius:11px;background:#f8fafc;color:#0f172a;
+    border:1.5px solid var(--slate-300);border-radius:11px;background:var(--slate-50);color:var(--slate-900);
     transition:.15s;font-family:inherit;
   }
-  .input-wrap input:focus{outline:none;border-color:#2563eb;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.13);}
-  .input-wrap::before{
-    content:"⌕";position:absolute;left:.85rem;top:50%;transform:translateY(-52%);
-    font-size:1.25rem;color:#94a3b8;pointer-events:none;
-  }
-  #limpiar{
+  .input-wrap input:focus{outline:none;border-color:var(--navy-700);background:#fff;box-shadow:0 0 0 4px rgba(27,42,74,.13);}
+  .input-wrap::before{content:"⌕";position:absolute;left:.85rem;top:50%;transform:translateY(-52%);font-size:1.25rem;color:var(--slate-400);pointer-events:none;}
+  .btn-limpiar{
     position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
-    border:none;background:#e2e8f0;color:#475569;width:1.5rem;height:1.5rem;
+    border:none;background:var(--slate-200);color:var(--slate-600);width:1.5rem;height:1.5rem;
     border-radius:50%;cursor:pointer;font-size:1rem;line-height:1;display:none;
     align-items:center;justify-content:center;
   }
-  #limpiar:hover{background:#cbd5e1;}
-  #limpiar.visible{display:flex;}
-  select{
-    padding:.72rem 2.2rem .72rem .9rem;font-size:.92rem;font-family:inherit;
-    border:1.5px solid #cbd5e1;border-radius:11px;background:#f8fafc;color:#0f172a;
-    cursor:pointer;appearance:none;
-    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right .7rem center;background-size:1rem;
-  }
-  select:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.13);}
-  .contador{font-size:.82rem;color:#64748b;margin-bottom:.85rem;}
+  .btn-limpiar:hover{background:var(--slate-300);}
+  .btn-limpiar.visible{display:flex;}
+  .contador{font-size:.82rem;color:var(--slate-500);margin-bottom:.85rem;}
 
-  /* TABLAS */
   .tabla-wrap{overflow-x:auto;border-radius:12px;border:1px solid #e8edf4;}
   table{width:100%;border-collapse:collapse;font-size:.9rem;}
   thead th{
-    background:#f1f5f9;color:#475569;font-weight:700;text-align:left;
-    padding:.6rem .8rem;border-bottom:2px solid #e2e8f0;
+    background:var(--slate-100);color:var(--slate-600);font-weight:700;text-align:left;
+    padding:.6rem .8rem;border-bottom:2px solid var(--slate-200);
     font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;
   }
   thead tr:first-child th{text-align:center;}
   thead tr:first-child th:first-child,thead tr:first-child th:nth-child(2){text-align:left;}
   tbody td{padding:.62rem .8rem;border-bottom:1px solid #eef2f7;vertical-align:middle;}
   tbody tr:last-child td{border-bottom:none;}
-  tbody tr:hover{background:#f8fafc;}
-  td.nombre{font-weight:600;color:#0f172a;}
+  tbody tr:hover{background:var(--slate-50);}
+  td.nombre{font-weight:600;color:var(--slate-900);}
   td.num,th.num{text-align:center;}
-  .nd{color:#cbd5e1;font-weight:600;}
-  .vacio{text-align:center;color:#94a3b8;padding:2rem 1rem !important;font-style:italic;}
+  td.rut{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.82rem;color:var(--slate-600);white-space:nowrap;}
+  .nd{color:var(--slate-300);font-weight:600;}
+  .vacio{text-align:center;color:var(--slate-400);padding:2rem 1rem !important;font-style:italic;}
 
-  /* BADGES */
-  .paes{
-    display:inline-block;min-width:3.6rem;text-align:center;
-    padding:.22rem .55rem;border-radius:999px;font-weight:800;
-    font-variant-numeric:tabular-nums;font-size:.85rem;letter-spacing:-.01em;
-  }
-  .p-bajo{background:#fee2e2;color:#b91c1c;}
-  .p-medio{background:#fef3c7;color:#b45309;}
-  .p-medio-alto{background:#dbeafe;color:#1d4ed8;}
-  .p-alto{background:#dcfce7;color:#15803d;}
-
-  .curso{
-    display:inline-block;padding:.16rem .55rem;border-radius:7px;
-    font-size:.76rem;font-weight:700;white-space:nowrap;
-    background:#eef2ff;color:#4338ca;
-  }
-  .curso.b{background:#fce7f3;color:#9d174d;}
-
+  .paes{display:inline-block;min-width:3.6rem;text-align:center;padding:.22rem .55rem;border-radius:999px;font-weight:800;font-variant-numeric:tabular-nums;font-size:.85rem;letter-spacing:-.01em;}
+  .p-bajo{background:var(--red-100);color:var(--red-700);}
+  .p-medio{background:var(--amber-100);color:var(--amber-700);}
+  .p-medio-alto{background:var(--navy-100);color:var(--navy-700);}
+  .p-alto{background:var(--green-100);color:var(--green-700);}
   .delta{font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums;}
-  .delta.up{color:#15803d;}
-  .delta.down{color:#dc2626;}
-  .delta.eq{color:#94a3b8;}
+  .delta.up{color:var(--green-700);}
+  .delta.down{color:var(--red-600);}
+  .delta.eq{color:var(--slate-400);}
 
-  /* PROMEDIOS */
-  .prom-card{
-    border:1px solid #e8edf4;border-radius:13px;overflow:hidden;margin-bottom:1.1rem;
+  .stats-block{background:#fff;border-radius:14px;border:1px solid #e8edf4;overflow:hidden;margin-bottom:1.3rem;}
+  .stats-block h3{
+    margin:0;padding:.85rem 1.1rem;font-size:.95rem;
+    background:linear-gradient(90deg,var(--navy-100),var(--slate-50));
+    border-bottom:1px solid #e8edf4;color:var(--navy-700);font-weight:800;
+    display:flex;align-items:center;gap:.6rem;
   }
-  .prom-card:last-child{margin-bottom:0;}
-  .prom-card h3{
-    margin:0;padding:.75rem 1rem;font-size:.92rem;
-    background:linear-gradient(90deg,#eff6ff,#f8fafc);
-    border-bottom:1px solid #e8edf4;color:#1e3a8a;font-weight:700;
-  }
-  .prom-card table{font-size:.88rem;}
-  .fila-general td{background:#f8fafc;font-weight:700;color:#1e3a8a;}
-  .nota{font-size:.82rem;color:#64748b;margin:.7rem 0 0;padding-left:.2rem;}
+  .stats-block h3 .emoji{font-size:1.05rem;}
+  .stats-block table{font-size:.88rem;}
+  .fila-generacion td{background:var(--slate-50);font-weight:700;color:var(--navy-700);}
+  .valor-destacado{font-weight:800;color:var(--navy-700);font-variant-numeric:tabular-nums;}
 
-  /* CONVERSIÓN */
+  .canvas-wrap{background:#fff;border-radius:14px;padding:1.1rem 1.1rem 1rem;border:1px solid #e8edf4;margin-bottom:1.3rem;}
+  .canvas-wrap h3{
+    font-size:1rem;margin-bottom:.2rem;color:var(--navy-700);font-weight:800;
+    display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;
+  }
+  .canvas-wrap .sub{font-size:.82rem;color:var(--slate-500);margin-bottom:.9rem;}
+  .canvas-wrap canvas{width:100%;max-width:100%;height:auto;display:block;border-radius:10px;background:#fbfdff;}
+  .leyenda{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:.8rem;font-size:.82rem;color:var(--slate-600);font-weight:600;}
+  .leyenda .li{display:flex;align-items:center;gap:.5rem;}
+  .leyenda .dot{width:.8rem;height:.8rem;border-radius:50%;display:inline-block;flex:0 0 auto;}
+  .leyenda .dash{width:1.8rem;height:0;border-top:3px dashed var(--slate-600);display:inline-block;flex:0 0 auto;}
+
   details.card{padding:0;overflow:hidden;}
-  details.card summary{
-    cursor:pointer;padding:1.1rem 1.5rem;font-weight:700;color:#1e3a8a;
-    list-style:none;display:flex;align-items:center;gap:.6rem;font-size:.98rem;
-  }
+  details.card summary{cursor:pointer;padding:1.1rem 1.5rem;font-weight:700;color:var(--navy-700);list-style:none;display:flex;align-items:center;gap:.6rem;font-size:.98rem;}
   details.card summary::-webkit-details-marker{display:none;}
-  details.card summary::before{
-    content:"▸";transition:.2s;color:#3b82f6;font-size:1rem;
-  }
+  details.card summary::before{content:"▸";transition:.2s;color:var(--red-600);font-size:1rem;}
   details.card[open] summary::before{transform:rotate(90deg);}
-  details.card summary:hover{background:#f8fafc;}
-  .conv-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));
-    gap:.5rem;padding:0 1.5rem 1.5rem;
-  }
-  .conv-item{
-    display:flex;justify-content:space-between;align-items:center;gap:.5rem;
-    padding:.4rem .7rem;border-radius:9px;background:#f8fafc;border:1px solid #eef2f7;
-    font-size:.83rem;
-  }
-  .conv-c{color:#64748b;font-weight:600;}
-  .conv-p{font-weight:800;color:#1d4ed8;font-variant-numeric:tabular-nums;}
+  details.card summary:hover{background:var(--slate-50);}
+  .conv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:.5rem;padding:0 1.5rem 1.5rem;}
+  .conv-item{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.4rem .7rem;border-radius:9px;background:var(--slate-50);border:1px solid #eef2f7;font-size:.83rem;}
+  .conv-c{color:var(--slate-500);font-weight:600;}
+  .conv-p{font-weight:800;color:var(--navy-700);font-variant-numeric:tabular-nums;}
 
-  footer{text-align:center;color:#94a3b8;font-size:.8rem;padding:0 1rem 2.5rem;}
+  /* ============ FAB (globo flotante) ============ */
+  .fab-container{
+    position:fixed;bottom:1.6rem;right:1.6rem;z-index:50;
+  }
+  .fab-btn{
+    width:3.6rem;height:3.6rem;border-radius:50%;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--red-700),var(--red-600));
+    color:#fff;font-size:1.4rem;
+    box-shadow:0 12px 28px -8px rgba(160,13,36,.65), 0 4px 12px -4px rgba(0,0,0,.3);
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .2s, box-shadow .2s;
+    position:relative;
+  }
+  .fab-btn:hover{transform:scale(1.08);box-shadow:0 16px 32px -10px rgba(160,13,36,.75), 0 6px 16px -5px rgba(0,0,0,.35);}
+  .fab-btn:active{transform:scale(.98);}
+  .fab-btn .fab-icon{transition:transform .25s;}
+  .fab-container.open .fab-btn .fab-icon{transform:rotate(90deg);}
+  .fab-menu{
+    position:absolute;bottom:4.4rem;right:0;
+    background:#fff;border-radius:16px;padding:.5rem;
+    box-shadow:0 20px 45px -15px rgba(15,23,42,.5), 0 0 0 1px rgba(15,23,42,.06);
+    min-width:220px;
+    opacity:0;transform:translateY(10px) scale(.96);
+    pointer-events:none;
+    transition:opacity .2s, transform .2s;
+    transform-origin:bottom right;
+  }
+  .fab-container.open .fab-menu{
+    opacity:1;transform:translateY(0) scale(1);pointer-events:auto;
+  }
+  .fab-menu button{
+    display:flex;align-items:center;gap:.6rem;width:100%;
+    padding:.7rem .85rem;border:none;background:transparent;
+    font-family:inherit;font-size:.88rem;font-weight:600;color:var(--slate-900);
+    border-radius:10px;cursor:pointer;transition:.15s;text-align:left;
+    letter-spacing:-.01em;
+  }
+  .fab-menu button:hover{background:var(--slate-100);color:var(--navy-700);}
+  .fab-menu button.active{background:var(--navy-100);color:var(--navy-700);font-weight:800;}
+  .fab-menu button.danger{color:var(--red-700);}
+  .fab-menu button.danger:hover{background:var(--red-100);color:var(--red-700);}
+  .fab-menu hr{border:none;border-top:1px solid var(--slate-200);margin:.35rem .3rem;}
+
+  /* ============ ESTUDIANTE ============ */
+  #view-estudiante{min-height:100vh;background:linear-gradient(160deg,#0F1E3D 0%,#1B2A4A 55%,#A00D24 130%);padding:1.5rem 1.25rem 3rem;position:relative;overflow:hidden;}
+  #view-estudiante::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 15% 85%, rgba(200,16,46,.25) 0%, transparent 55%);
+    pointer-events:none;
+  }
+  #view-estudiante.active{display:block;}
+  .est-topbar{max-width:760px;margin:0 auto .5rem;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+  .est-wrap{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+  .est-hero{color:#fff;text-align:center;margin:1.5rem 0 1.6rem;}
+  .est-hero .tag{display:inline-block;margin-bottom:.75rem;padding:.25rem .7rem;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+  .est-hero h1{font-size:1.8rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.4rem;}
+  .est-hero p{opacity:.9;font-size:.95rem;max-width:48ch;margin:0 auto;}
+
+  .burbuja{
+    background:#fff;border-radius:22px;padding:1.5rem 1.5rem 1.4rem;
+    box-shadow:0 26px 55px -22px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.15);
+    position:relative;animation:flotar 4s ease-in-out infinite;
+  }
+  @keyframes flotar{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  .burbuja::after{content:"";position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);width:22px;height:22px;background:#fff;border-radius:50%;box-shadow:0 8px 14px -6px rgba(0,0,0,.35);}
+  .burbuja::before{content:"";position:absolute;left:50%;bottom:-26px;transform:translateX(-50%);width:10px;height:10px;background:#fff;border-radius:50%;box-shadow:0 6px 12px -5px rgba(0,0,0,.3);}
+  .burbuja h2{font-size:1.05rem;font-weight:800;color:var(--slate-900);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem;}
+  .burbuja .form-desc{color:var(--slate-500);font-size:.87rem;margin-bottom:1.1rem;}
+  .rut-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .rut-input-wrap{position:relative;flex:1 1 220px;}
+  .rut-input-wrap input{
+    width:100%;padding:.85rem 1rem .85rem 2.6rem;font-size:1rem;
+    border:1.5px solid var(--slate-300);border-radius:12px;background:var(--slate-50);color:var(--slate-900);
+    font-family:"SF Mono",Menlo,Consolas,monospace;letter-spacing:.03em;transition:.15s;
+  }
+  .rut-input-wrap input:focus{outline:none;border-color:var(--red-600);background:#fff;box-shadow:0 0 0 4px rgba(200,16,46,.13);}
+  .rut-input-wrap::before{content:"🆔";position:absolute;left:.9rem;top:50%;transform:translateY(-50%);font-size:1rem;pointer-events:none;filter:grayscale(.3);opacity:.7;}
+  .btn-rut{
+    flex:0 0 auto;padding:.85rem 1.4rem;font-family:inherit;font-size:.95rem;font-weight:700;
+    background:linear-gradient(135deg,var(--red-700),var(--red-600));color:#fff;border:none;
+    border-radius:12px;cursor:pointer;transition:.15s;letter-spacing:.01em;
+    box-shadow:0 6px 16px -6px rgba(160,13,36,.6);
+  }
+  .btn-rut:hover{transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(160,13,36,.7);}
+  .hint{font-size:.78rem;color:var(--slate-400);margin-top:.7rem;}
+  .hint b{color:var(--slate-600);font-weight:700;}
+
+  .msg{margin-top:1rem;padding:.85rem 1rem;border-radius:12px;font-size:.9rem;display:none;line-height:1.45;}
+  .msg.visible{display:block;}
+  .msg.error{background:var(--red-100);color:var(--red-700);border:1px solid #F5C2CC;}
+  .msg.success{background:var(--green-100);color:var(--green-700);border:1px solid #BBF7D0;}
+
+  #resultado-estudiante{margin-top:1.5rem;}
+  .res-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 26px 55px -22px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.15);animation:aparecer .35s ease-out;}
+  .res-head{padding:1.3rem 1.5rem 1.15rem;background:linear-gradient(135deg,var(--navy-800),var(--navy-600));color:#fff;position:relative;}
+  .res-head::after{
+    content:"";position:absolute;top:0;right:0;height:100%;width:5px;
+    background:linear-gradient(180deg,var(--red-600),var(--red-700));
+  }
+  .res-head .eyebrow{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;opacity:.85;font-weight:700;margin-bottom:.25rem;}
+  .res-head h3{font-size:1.3rem;font-weight:800;letter-spacing:-.02em;line-height:1.25;}
+  .res-head .meta{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:.6rem;font-size:.83rem;opacity:.95;}
+  .res-head .chip{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:.18rem .6rem;border-radius:999px;font-weight:600;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.78rem;}
+  .res-body{padding:1.4rem 1.5rem 1.5rem;}
+  .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.1rem;}
+  @media(max-width:520px){.res-grid{grid-template-columns:1fr;}}
+  .res-exam{border:1px solid #e8edf4;border-radius:14px;padding:1.1rem 1.1rem 1.15rem;background:linear-gradient(180deg,var(--slate-50) 0%,#fff 100%);}
+  .res-exam .exam-title{font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--slate-500);margin-bottom:.6rem;}
+  .res-exam .num-grande{font-size:2.1rem;font-weight:900;color:var(--slate-900);letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;}
+  .res-exam .num-sub{font-size:.78rem;color:var(--slate-400);margin-top:.15rem;font-weight:600;}
+  .res-exam .paes-line{display:flex;align-items:center;gap:.5rem;margin-top:.85rem;padding-top:.85rem;border-top:1px dashed var(--slate-200);}
+  .res-exam .paes-line .lbl{font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--slate-500);font-weight:800;}
+  .res-exam .paes-big{display:inline-block;padding:.3rem .75rem;border-radius:999px;font-weight:900;font-size:1.05rem;letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
+  .res-exam.nd{opacity:.72;}
+  .res-delta{display:flex;align-items:center;gap:.7rem;padding:.95rem 1.1rem;border-radius:13px;background:var(--slate-50);border:1px solid #e8edf4;margin-bottom:1rem;}
+  .res-delta .lbl{font-size:.78rem;font-weight:800;color:var(--slate-600);text-transform:uppercase;letter-spacing:.06em;}
+  .res-delta .val{font-size:1.1rem;font-weight:900;font-variant-numeric:tabular-nums;}
+  .res-delta .val.up{color:var(--green-700);}
+  .res-delta .val.down{color:var(--red-600);}
+  .res-delta .val.eq{color:var(--slate-500);}
+  .res-delta .ctx{margin-left:auto;font-size:.78rem;color:var(--slate-400);text-align:right;}
+  .res-footer{font-size:.8rem;color:var(--slate-400);text-align:center;padding-top:.5rem;border-top:1px solid #eef2f7;margin-top:1rem;}
+
+  footer{text-align:center;color:var(--slate-400);font-size:.8rem;padding:0 1rem 2.5rem;}
 
   @media(max-width:640px){
     .card{padding:1.15rem 1rem;}
-    header{padding:1.8rem 0 2.6rem;}
-    header h1{font-size:1.5rem;}
+    .view-header{padding:1.2rem 0 2.4rem;}
     thead th,tbody td{padding:.5rem .55rem;font-size:.78rem;}
     .paes{min-width:3rem;font-size:.78rem;padding:.18rem .4rem;}
+    .landing-grid{grid-template-columns:1fr;}
+    .tab-btn{font-size:.82rem;padding:.65rem .8rem;min-width:120px;}
+    .card-corner-logo{width:2rem;height:2rem;top:1.15rem;left:1.15rem;}
+    .card.with-logo > h2{padding-left:2.8rem;min-height:2rem;}
+    .stats-block.with-logo > h3,.canvas-wrap.with-logo > h3{padding-left:2.8rem;min-height:2rem;}
+    details.card.with-logo > summary{padding-left:3.6rem;}
+    details.card.with-logo > summary::after{width:2rem;height:2rem;left:1.15rem;}
+    .fab-container{bottom:1.1rem;right:1.1rem;}
+    .fab-btn{width:3.2rem;height:3.2rem;font-size:1.25rem;}
+    .fab-menu{min-width:200px;}
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <span class="tag">Análisis de resultados</span>
-    <h1>Ensayos M1 · IV° Medio</h1>
-    <p>Comparación de resultados entre el ensayo del <strong>29 de septiembre</strong> y el del <strong>7 de octubre</strong>, con conversión de respuestas correctas a puntaje PAES.</p>
+<!-- ============ LANDING ============ -->
+<section id="landing" class="view active">
+  <div class="landing-inner">
+    <img class="logo-185" src="logo-185.png" alt="185 años Colegio SSCC Providencia">
+    <span class="tag">Ensayos M1 · IV° Medio</span>
+    <h1>Selecciona tu perfil</h1>
+    <p>Consulta los resultados de los ensayos del 29 de septiembre y del 7 de octubre.</p>
+    <div class="landing-grid">
+      <button type="button" class="rol-card docente" id="btn-docente">
+        <span class="lock-badge">🔒 Privado</span>
+        <div class="icono">🎓</div>
+        <h2>Docente</h2>
+        <p>Panel completo con resultados por curso, estadísticas descriptivas y análisis gráfico. Requiere autenticación.</p>
+        <span class="flecha">Ingresar con credenciales →</span>
+      </button>
+      <button type="button" class="rol-card estudiante" id="btn-estudiante">
+        <div class="icono">👤</div>
+        <h2>Estudiante</h2>
+        <p>Ingresa tu RUT para ver únicamente tus dos resultados y su equivalencia en puntaje PAES.</p>
+        <span class="flecha">Consultar mis puntajes →</span>
+      </button>
+    </div>
   </div>
-</header>
+</section>
 
-<main class="wrap">
+<!-- ============ LOGIN ============ -->
+<section id="view-login" class="view">
+  <div class="login-topbar">
+    <button type="button" class="btn-volver" data-volver>← Volver al inicio</button>
+  </div>
+  <div class="login-card">
+    <img class="login-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+    <h1>Acceso Docente</h1>
+    <p>Ingresa tu usuario y contraseña para acceder al panel de resultados.</p>
+    <form id="form-login" autocomplete="off">
+      <label class="field">
+        <span>Usuario</span>
+        <input id="login-user" type="text" placeholder="nombre.apellido" autocomplete="off" spellcheck="false" autocapitalize="off">
+      </label>
+      <label class="field pass">
+        <span>Contraseña (4 dígitos)</span>
+        <input id="login-pass" type="password" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off">
+      </label>
+      <button type="submit" class="btn-login">Ingresar al panel</button>
+    </form>
+    <div id="login-msg" class="msg"></div>
+    <p class="login-hint">Si olvidaste tus credenciales, contacta al administrador del sitio.</p>
+  </div>
+</section>
 
-  <!-- ESTADÍSTICAS -->
-  <section class="stats" id="stats"></section>
-
-  <!-- SECCIÓN 1: BÚSQUEDA -->
-  <section class="card" id="sec-busqueda">
-    <h2><span class="num">1</span> Búsqueda de puntaje por nombre</h2>
-    <p class="desc">Escribe el nombre o apellido de un estudiante para ver sus dos resultados asociados, con su equivalencia en puntaje PAES y la variación entre ambas pruebas.</p>
-
-    <div class="controles">
-      <div class="input-wrap">
-        <input id="busqueda" type="text" placeholder="Ej: Aguirre, Martina, Leiva, Joaquín…" autocomplete="off" spellcheck="false">
-        <button id="limpiar" title="Limpiar búsqueda" aria-label="Limpiar">×</button>
+<!-- ============ DOCENTE ============ -->
+<section id="view-docente" class="view">
+  <header class="view-header">
+    <div class="wrap">
+      <div class="top-bar">
+        <button type="button" class="btn-volver" id="btn-volver-docente">← Volver al inicio</button>
+        <span class="user-tag">👤 Sesión: <b id="user-display">—</b></span>
       </div>
-      <select id="filtroCurso" aria-label="Filtrar por curso">
-        <option value="">Todos los cursos</option>
-        <option value="IV° medio A">IV° medio A</option>
-        <option value="IV° medio B">IV° medio B</option>
-      </select>
+      <h1>Ensayos M1 · IV° Medio</h1>
+      <p>Panel docente con resultados por curso, estadísticas descriptivas y análisis gráfico de ambos ensayos.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="iva">📘 Resultados IVA</button>
+      <button class="tab-btn" data-tab="ivb">📗 Resultados IVB</button>
+      <button class="tab-btn" data-tab="stats">📊 Estadísticas</button>
+      <button class="tab-btn" data-tab="graficos">📈 Gráficos de Dispersión</button>
     </div>
 
-    <div class="contador" id="contador"></div>
-
-    <div class="tabla-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th rowspan="2">Estudiante</th>
-            <th rowspan="2">Curso</th>
-            <th colspan="2">Ensayo 29 sept.</th>
-            <th colspan="2">Ensayo 7 oct.</th>
-            <th rowspan="2">Δ PAES</th>
-          </tr>
-          <tr>
-            <th>Correctas</th>
-            <th>PAES</th>
-            <th>Correctas</th>
-            <th>PAES</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyResultados"></tbody>
-      </table>
+    <!-- RESULTADOS IVA -->
+    <div class="tab-panel active" id="tab-iva">
+      <div class="card with-logo">
+        <img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+        <h2><span class="num">A</span> Búsqueda de puntaje por nombre o RUT · IV° medio A</h2>
+        <p class="desc">Escribe el nombre, apellido o RUT de un estudiante de IV° medio A para ver sus dos resultados asociados.</p>
+        <div class="controles">
+          <div class="input-wrap">
+            <input id="busqueda-iva" type="text" placeholder="Ej: Aguirre, Joaquín, 22.704.214-1…" autocomplete="off" spellcheck="false">
+            <button class="btn-limpiar" data-limpiar="iva" title="Limpiar" aria-label="Limpiar">×</button>
+          </div>
+        </div>
+        <div class="contador" id="contador-iva"></div>
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">Estudiante</th>
+                <th rowspan="2">RUT</th>
+                <th colspan="2">Ensayo 29 sept.</th>
+                <th colspan="2">Ensayo 7 oct.</th>
+                <th rowspan="2">Δ PAES</th>
+              </tr>
+              <tr>
+                <th>Correctas</th><th>PAES</th>
+                <th>Correctas</th><th>PAES</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-iva"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- SECCIÓN 2: PROMEDIOS -->
-  <section class="card" id="sec-promedios">
-    <h2><span class="num">2</span> Promedio de curso por prueba</h2>
-    <p class="desc">Promedio de respuestas correctas y de puntaje PAES obtenido por cada curso en cada uno de los ensayos, junto con el mejor y el más bajo puntaje del grupo.</p>
-    <div id="promedios"></div>
-  </section>
+    <!-- RESULTADOS IVB -->
+    <div class="tab-panel" id="tab-ivb">
+      <div class="card with-logo">
+        <img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+        <h2><span class="num">B</span> Búsqueda de puntaje por nombre o RUT · IV° medio B</h2>
+        <p class="desc">Escribe el nombre, apellido o RUT de un estudiante de IV° medio B para ver sus dos resultados asociados.</p>
+        <div class="controles">
+          <div class="input-wrap">
+            <input id="busqueda-ivb" type="text" placeholder="Ej: Álvarez, 22.967.500-1…" autocomplete="off" spellcheck="false">
+            <button class="btn-limpiar" data-limpiar="ivb" title="Limpiar" aria-label="Limpiar">×</button>
+          </div>
+        </div>
+        <div class="contador" id="contador-ivb"></div>
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">Estudiante</th>
+                <th rowspan="2">RUT</th>
+                <th colspan="2">Ensayo 29 sept.</th>
+                <th colspan="2">Ensayo 7 oct.</th>
+                <th rowspan="2">Δ PAES</th>
+              </tr>
+              <tr>
+                <th>Correctas</th><th>PAES</th>
+                <th>Correctas</th><th>PAES</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-ivb"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-  <!-- CONVERSIÓN -->
-  <details class="card">
-    <summary>Tabla de conversión: respuestas correctas → puntaje PAES</summary>
-    <div class="conv-grid" id="tablaConversion"></div>
-  </details>
+    <!-- ESTADÍSTICAS -->
+    <div class="tab-panel" id="tab-stats">
+      <div id="stats-body"></div>
+    </div>
 
-</main>
+    <!-- GRÁFICOS -->
+    <div class="tab-panel" id="tab-graficos">
+      <div class="canvas-wrap with-logo">
+        <img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+        <h3>📘 IV° Medio A · Frecuencia por rango PAES</h3>
+        <p class="sub">Cada punto indica cuántos estudiantes de IV° A obtuvieron un puntaje PAES dentro del rango indicado. Línea azul punteada: ensayo del 29 de septiembre. Línea roja punteada: ensayo del 7 de octubre.</p>
+        <canvas id="canvas-iva" width="960" height="480"></canvas>
+        <div class="leyenda">
+          <div class="li"><span class="dot" style="background:#2C4270;"></span> Ensayo 29 sept.</div>
+          <div class="li"><span class="dot" style="background:#C8102E;"></span> Ensayo 7 oct.</div>
+          <div class="li"><span class="dash" style="border-color:#2C4270;"></span> Línea de frecuencia</div>
+        </div>
+      </div>
 
-<footer>Panel generado a partir de los archivos de resultados de los ensayos M1 · IV° Medio A y B.</footer>
+      <div class="canvas-wrap with-logo">
+        <img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+        <h3>📗 IV° Medio B · Frecuencia por rango PAES</h3>
+        <p class="sub">Cada punto indica cuántos estudiantes de IV° B obtuvieron un puntaje PAES dentro del rango indicado. Línea azul punteada: ensayo del 29 de septiembre. Línea roja punteada: ensayo del 7 de octubre.</p>
+        <canvas id="canvas-ivb" width="960" height="480"></canvas>
+        <div class="leyenda">
+          <div class="li"><span class="dot" style="background:#2C4270;"></span> Ensayo 29 sept.</div>
+          <div class="li"><span class="dot" style="background:#C8102E;"></span> Ensayo 7 oct.</div>
+          <div class="li"><span class="dash" style="border-color:#2C4270;"></span> Línea de frecuencia</div>
+        </div>
+      </div>
+
+      <div class="canvas-wrap with-logo">
+        <img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">
+        <h3>📊 Generación completa (IVA + IVB) · Frecuencia por rango PAES</h3>
+        <p class="sub">Se incluyen todos los estudiantes de ambos cursos. Cada punto indica cuántos estudiantes obtuvieron un puntaje PAES dentro del rango indicado.</p>
+        <canvas id="canvas-todos" width="960" height="520"></canvas>
+        <div class="leyenda">
+          <div class="li"><span class="dot" style="background:#2C4270;"></span> Ensayo 29 sept.</div>
+          <div class="li"><span class="dot" style="background:#C8102E;"></span> Ensayo 7 oct.</div>
+          <div class="li"><span class="dash" style="border-color:#2C4270;"></span> Línea de frecuencia</div>
+        </div>
+      </div>
+    </div>
+
+    <details class="card with-logo" style="margin-top:1.6rem;">
+      <summary>Tabla de conversión: respuestas correctas → puntaje PAES</summary>
+      <div class="conv-grid" id="tablaConversion"></div>
+    </details>
+  </main>
+
+  <footer>Colegio de los Sagrados Corazones de Providencia · Panel de resultados Ensayos M1 · IV° Medio A y B</footer>
+
+  <!-- FAB: Globo flotante con acceso a todas las secciones -->
+  <div class="fab-container" id="fab-container">
+    <div class="fab-menu" id="fab-menu">
+      <button type="button" data-fab-tab="iva" class="active">📘 Resultados IVA</button>
+      <button type="button" data-fab-tab="ivb">📗 Resultados IVB</button>
+      <button type="button" data-fab-tab="stats">📊 Estadísticas</button>
+      <button type="button" data-fab-tab="graficos">📈 Gráficos de Dispersión</button>
+      <hr>
+      <button type="button" id="fab-logout" class="danger">🚪 Cerrar sesión</button>
+      <button type="button" id="fab-inicio">🏠 Volver al inicio</button>
+    </div>
+    <button type="button" class="fab-btn" id="fab-btn" aria-label="Menú rápido">
+      <span class="fab-icon">☰</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ ESTUDIANTE ============ -->
+<section id="view-estudiante" class="view">
+  <div class="est-topbar">
+    <button type="button" class="btn-volver" data-volver>← Volver al inicio</button>
+  </div>
+  <div class="est-wrap">
+    <div class="est-hero">
+      <span class="tag">Consulta individual</span>
+      <h1>Mis resultados</h1>
+      <p>Ingresa tu RUT para ver tus puntajes en los ensayos M1 del 29 de septiembre y del 7 de octubre.</p>
+    </div>
+    <div class="burbuja">
+      <h2>🔎 Buscar por RUT</h2>
+      <p class="form-desc">Puedes escribir con o sin puntos. Ejemplo: <b>12.345.678-9</b> o <b>12345678-9</b>.</p>
+      <form id="form-rut" class="rut-row" autocomplete="off">
+        <div class="rut-input-wrap">
+          <input id="input-rut" type="text" placeholder="12.345.678-9" maxlength="14" inputmode="numeric" autocomplete="off" spellcheck="false">
+        </div>
+        <button type="submit" class="btn-rut">Ver mis puntajes</button>
+      </form>
+      <div class="hint">El RUT debe corresponder a un estudiante de <b>IV° medio A</b> o <b>IV° medio B</b>.</div>
+      <div id="msg-rut" class="msg"></div>
+    </div>
+    <div id="resultado-estudiante"></div>
+  </div>
+</section>
 
 <script>
 (function(){
   "use strict";
 
-  /* ===== TABLA PAES ===== */
+  /* =========================================================
+     CREDENCIALES DOCENTES
+     Usuario → contraseña de 4 dígitos
+     ========================================================= */
+  var CREDENCIALES = {
+    "rosa.gaete":         "4821",
+    "elias.caro":         "7305",
+    "cristina.saavedra":  "9164",
+    "joaquin.hevia":      "2538",
+    "carolina.bravo":     "6072"
+  };
+
+  var SESSION_KEY = "sscc_docente_sesion";
+
   var TABLA_PAES = [
     100,173,196,216,236,255,273,290,305,318,
     331,345,360,375,389,399,408,417,426,438,
@@ -270,91 +726,106 @@
     1000
   ];
 
-  /* ===== DATOS ===== */
+  var INTERVALOS = [
+    {label:"100-199", min:100, max:199},
+    {label:"200-249", min:200, max:249},
+    {label:"250-299", min:250, max:299},
+    {label:"300-349", min:300, max:349},
+    {label:"350-399", min:350, max:399},
+    {label:"400-449", min:400, max:449},
+    {label:"450-499", min:450, max:499},
+    {label:"500-549", min:500, max:549},
+    {label:"550-599", min:550, max:599},
+    {label:"600-649", min:600, max:649},
+    {label:"650-699", min:650, max:699},
+    {label:"700-749", min:700, max:749},
+    {label:"750-799", min:750, max:799},
+    {label:"800-849", min:800, max:849},
+    {label:"850-899", min:850, max:899},
+    {label:"900-949", min:900, max:949},
+    {label:"950-1000", min:950, max:1000}
+  ];
+
   var ENSAYOS = [
     {
       id: "sep29",
       titulo: "Ensayo M1 · 29 de septiembre",
       registros: [
-        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:53},
-        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:40},
-        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:53},
-        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:58},
-        {ap:"Delorme Caro",nom:"Sofía Elisa",curso:"IV° medio A",c:60},
-        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:55},
-        {ap:"García",nom:"Araceli",curso:"IV° medio A",c:42},
-        {ap:"González",nom:"Martina",curso:"IV° medio A",c:57},
-        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:60},
-        {ap:"Morales Tolra",nom:"Fernanda Antonia",curso:"IV° medio A",c:43},
-        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:40},
-        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:58},
-        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51},
-        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:43},
-        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:58},
-        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:48},
-        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:52},
-        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:45},
-        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:57},
-        {ap:"Bonet Gavidia",nom:"Matías",curso:"IV° medio B",c:52},
-        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:55},
-        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:47},
-        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54},
-        {ap:"Leiva Larrain",nom:"Matías Alejandro",curso:"IV° medio B",c:58},
-        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:54},
-        {ap:"Méndez Hernández",nom:"Sebastián",curso:"IV° medio B",c:49},
-        {ap:"Merino",nom:"José Manuel",curso:"IV° medio B",c:null},
-        {ap:"Rivas Vallejos",nom:"Antonela Sofía",curso:"IV° medio B",c:56},
-        {ap:"Rojas",nom:"Sepúlveda",curso:"IV° medio B",c:45},
-        {ap:"Salgado Medina",nom:"Alicia Sofía",curso:"IV° medio B",c:46}
+        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:53,rut:"22.704.214-1"},
+        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:40,rut:"22.985.386-4"},
+        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:53,rut:"22.888.968-7"},
+        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:58,rut:"22.832.649-6"},
+        {ap:"Delorme Caro",nom:"Sofía Elisa",curso:"IV° medio A",c:60,rut:"22.953.565-K"},
+        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:55,rut:"22.914.987-3"},
+        {ap:"García",nom:"Araceli",curso:"IV° medio A",c:42,rut:"22.672.864-3"},
+        {ap:"González",nom:"Martina",curso:"IV° medio A",c:57,rut:"22.873.380-6"},
+        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:60,rut:"22.900.444-1"},
+        {ap:"Morales Tolra",nom:"Fernanda Antonia",curso:"IV° medio A",c:43,rut:"22.866.752-8"},
+        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:40,rut:"22.822.626-2"},
+        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:58,rut:"22.856.389-7"},
+        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51,rut:"22.699.691-5"},
+        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:43,rut:"22.898.311-K"},
+        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:58,rut:"22.703.797-0"},
+        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:48,rut:"22.919.629-4"},
+        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:52,rut:"22.965.462-4"},
+        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:45,rut:"22.517.170-K"},
+        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:57,rut:"22.967.500-1"},
+        {ap:"Bonet Gavidia",nom:"Matías",curso:"IV° medio B",c:52,rut:"22.923.484-6"},
+        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:55,rut:"22.912.956-2"},
+        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:47,rut:"22.691.873-6"},
+        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54,rut:"22.713.715-0"},
+        {ap:"Leiva Larrain",nom:"Matías Alejandro",curso:"IV° medio B",c:58,rut:"22.749.586-3"},
+        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:54,rut:"22.847.280-8"},
+        {ap:"Méndez Hernández",nom:"Sebastián",curso:"IV° medio B",c:49,rut:"27.940.996-5"},
+        {ap:"Merino",nom:"José Manuel",curso:"IV° medio B",c:null,rut:"22.675.783-K"},
+        {ap:"Rivas Vallejos",nom:"Antonela Sofía",curso:"IV° medio B",c:56,rut:"22.896.817-K"},
+        {ap:"Rojas",nom:"Sepúlveda",curso:"IV° medio B",c:45,rut:"22.745.346-K"},
+        {ap:"Salgado Medina",nom:"Alicia Sofía",curso:"IV° medio B",c:46,rut:"22.930.798-3"}
       ]
     },
     {
       id: "oct07",
       titulo: "Ensayo M1 · 7 de octubre",
       registros: [
-        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:59},
-        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:41},
-        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:52},
-        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:56},
-        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:53},
-        {ap:"Campaña",nom:"Matilda",curso:"IV° medio A",c:46},
-        {ap:"González",nom:"Martina",curso:"IV° medio A",c:55},
-        {ap:"González de Santis",nom:"Tomás Ignacio",curso:"IV° medio A",c:55},
-        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:59},
-        {ap:"Lavandero Lizama",nom:"Catalina Paz",curso:"IV° medio A",c:32},
-        {ap:"Matilla",nom:"Olivia",curso:"IV° medio A",c:52},
-        {ap:"Moriamez Moyano",nom:"Magdalena",curso:"IV° medio A",c:44},
-        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:43},
-        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:59},
-        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51},
-        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:57},
-        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:60},
-        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:52},
-        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:57},
-        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:44},
-        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:58},
-        {ap:"Azar Jiménez",nom:"Joaquín Alonso",curso:"IV° medio B",c:54},
-        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:51},
-        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:49},
-        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54},
-        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:52},
-        {ap:"Obregón Contreras",nom:"Gonzalo Cristian",curso:"IV° medio B",c:59},
-        {ap:"Polloni Farías",nom:"Gabriel Elián",curso:"IV° medio B",c:37},
-        {ap:"Rojas",nom:"Josefa",curso:"IV° medio B",c:45}
+        {ap:"Aguirre",nom:"Joaquín",curso:"IV° medio A",c:59,rut:"22.704.214-1"},
+        {ap:"Almeida Puebla",nom:"María Emilia",curso:"IV° medio A",c:41,rut:"22.985.386-4"},
+        {ap:"Arancibia Godoy",nom:"Isidora Ignacia",curso:"IV° medio A",c:52,rut:"22.888.968-7"},
+        {ap:"Atenas Mollo",nom:"Gabriela",curso:"IV° medio A",c:56,rut:"22.832.649-6"},
+        {ap:"Gajardo",nom:"Benjamín",curso:"IV° medio A",c:53,rut:"22.914.987-3"},
+        {ap:"Campaña",nom:"Matilda",curso:"IV° medio A",c:46,rut:"22.908.341-4"},
+        {ap:"González",nom:"Martina",curso:"IV° medio A",c:55,rut:"22.873.380-6"},
+        {ap:"González de Santis",nom:"Tomás Ignacio",curso:"IV° medio A",c:55,rut:"22.858.179-8"},
+        {ap:"Hurtado Celedón",nom:"Facundo",curso:"IV° medio A",c:59,rut:"22.900.444-1"},
+        {ap:"Lavandero Lizama",nom:"Catalina Paz",curso:"IV° medio A",c:32,rut:"22.982.254-3"},
+        {ap:"Matilla",nom:"Olivia",curso:"IV° medio A",c:52,rut:"25.908.815-1"},
+        {ap:"Moriamez Moyano",nom:"Magdalena",curso:"IV° medio A",c:44,rut:"22.822.380-8"},
+        {ap:"Parra",nom:"Alonso",curso:"IV° medio A",c:43,rut:"22.822.626-2"},
+        {ap:"Peña La Rivera",nom:"Antonia Paz",curso:"IV° medio A",c:59,rut:"22.856.389-7"},
+        {ap:"Pizarro Kramm",nom:"Vicente",curso:"IV° medio A",c:51,rut:"22.699.691-5"},
+        {ap:"Ramirez Riquelme",nom:"Magdalena Itzel",curso:"IV° medio A",c:57,rut:"22.898.311-K"},
+        {ap:"Roth Aguayo",nom:"Mila Adelaida",curso:"IV° medio A",c:60,rut:"22.703.797-0"},
+        {ap:"Sáez Vallejo",nom:"Alex Roberto",curso:"IV° medio A",c:52,rut:"22.919.629-4"},
+        {ap:"Tessini",nom:"Florencia",curso:"IV° medio A",c:57,rut:"22.965.462-4"},
+        {ap:"Valdebenito Abarca",nom:"Manuel",curso:"IV° medio A",c:44,rut:"22.517.170-K"},
+        {ap:"Álvarez Fernández",nom:"Margarita Luz",curso:"IV° medio B",c:58,rut:"22.967.500-1"},
+        {ap:"Azar Jiménez",nom:"Joaquín Alonso",curso:"IV° medio B",c:54,rut:"22.927.188-1"},
+        {ap:"Dominguez Vergara",nom:"Emilia Victoria",curso:"IV° medio B",c:51,rut:"22.912.956-2"},
+        {ap:"Garretón Perona",nom:"Vicente Antonio",curso:"IV° medio B",c:49,rut:"22.691.873-6"},
+        {ap:"Jara Contreras",nom:"Matías",curso:"IV° medio B",c:54,rut:"22.713.715-0"},
+        {ap:"Leiva Rojas",nom:"Martina Fernanda",curso:"IV° medio B",c:52,rut:"22.847.280-8"},
+        {ap:"Obregón Contreras",nom:"Gonzalo Cristian",curso:"IV° medio B",c:59,rut:"22.979.967-3"},
+        {ap:"Polloni Farías",nom:"Gabriel Elián",curso:"IV° medio B",c:37,rut:"22.897.585-0"},
+        {ap:"Rojas",nom:"Josefa",curso:"IV° medio B",c:45,rut:"22.745.346-K"}
       ]
     }
   ];
 
-  /* ===== UTILIDADES ===== */
   function norm(s){
     return String(s == null ? "" : s)
       .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g," ")
-      .replace(/\s+/g," ")
-      .trim();
+      .toLowerCase().replace(/[^a-z0-9\s]/g," ")
+      .replace(/\s+/g," ").trim();
   }
-
   function titulo(s){
     return String(s).split(/\s+/).map(function(w){
       if(!w) return w;
@@ -364,43 +835,65 @@
       return w;
     }).join(" ");
   }
-
   function paesDe(c){
     if(c === null || c === undefined || c === "") return null;
     var i = Math.max(0, Math.min(TABLA_PAES.length - 1, Math.round(c)));
     return TABLA_PAES[i];
   }
-
-  function fmt(n){
-    return Number(n).toLocaleString("es-CL");
-  }
-
-  function clave(ap, nom){
-    return norm(ap + " " + nom).split(" ").filter(Boolean).sort().join(" ");
-  }
-
+  function fmt(n){ return Number(n).toLocaleString("es-CL"); }
   function badge(p){
     var clase = p >= 800 ? "p-alto" : p >= 650 ? "p-medio-alto" : p >= 500 ? "p-medio" : "p-bajo";
     return '<span class="paes ' + clase + '">' + fmt(p) + "</span>";
   }
-
   function deltaHTML(d){
     if(d > 0) return '<span class="delta up">▲ +' + d + "</span>";
     if(d < 0) return '<span class="delta down">▼ ' + d + "</span>";
     return '<span class="delta eq">= 0</span>';
   }
+  function normalizarRut(rut){
+    return String(rut == null ? "" : rut).replace(/[^0-9kK]/g,"").toUpperCase();
+  }
+  function validarRut(rut){
+    var limpio = normalizarRut(rut);
+    if(limpio.length < 2) return false;
+    var cuerpo = limpio.slice(0, -1);
+    var dv = limpio.slice(-1);
+    if(!/^\d+$/.test(cuerpo)) return false;
+    var suma = 0, mult = 2;
+    for(var i = cuerpo.length - 1; i >= 0; i--){
+      suma += parseInt(cuerpo.charAt(i), 10) * mult;
+      mult = mult === 7 ? 2 : mult + 1;
+    }
+    var resto = suma % 11;
+    var dvEsp = 11 - resto;
+    if(dvEsp === 11) dvEsp = "0"; else if(dvEsp === 10) dvEsp = "K"; else dvEsp = String(dvEsp);
+    return dv === dvEsp;
+  }
+  function formatearRut(rut){
+    var limpio = normalizarRut(rut);
+    if(limpio.length < 2) return rut;
+    var cuerpo = limpio.slice(0, -1);
+    var dv = limpio.slice(-1);
+    var conPuntos = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return conPuntos + "-" + dv;
+  }
+  function desviacionEst(vals){
+    if(!vals || vals.length < 2) return null;
+    var media = vals.reduce(function(a,b){ return a+b; },0) / vals.length;
+    var sq = vals.map(function(v){ return Math.pow(v - media, 2); });
+    var varianza = sq.reduce(function(a,b){ return a+b; },0) / (vals.length - 1);
+    return Math.sqrt(varianza);
+  }
 
-  /* ===== CONSOLIDAR ESTUDIANTES ===== */
   var ESTUDIANTES = (function(){
-    var mapa = {};
-    var orden = [];
-
+    var mapa = {}, orden = [];
     ENSAYOS.forEach(function(ens){
       ens.registros.forEach(function(r){
-        var k = clave(r.ap, r.nom);
+        var k = normalizarRut(r.rut);
         if(!mapa[k]){
           mapa[k] = {
-            key: k,
+            rutKey: k,
+            rut: formatearRut(r.rut),
             nombre: titulo(r.ap) + ", " + titulo(r.nom),
             busqueda: norm(r.ap + " " + r.nom),
             curso: r.curso,
@@ -411,85 +904,229 @@
         mapa[k].resultados[ens.id] = { correctas: r.c, paes: paesDe(r.c) };
       });
     });
-
     return orden.map(function(k){ return mapa[k]; }).sort(function(a,b){
       return a.curso.localeCompare(b.curso, "es") || a.nombre.localeCompare(b.nombre, "es");
     });
   })();
 
-  /* ===== RENDER STATS ===== */
-  function renderStats(){
-    var conAmbas = ESTUDIANTES.filter(function(e){
-      return e.resultados.sep29 && e.resultados.sep29.paes != null &&
-             e.resultados.oct07 && e.resultados.oct07.paes != null;
-    }).length;
+  var INDICE_RUT = (function(){
+    var idx = {};
+    ESTUDIANTES.forEach(function(e){ idx[e.rutKey] = e; });
+    return idx;
+  })();
 
-    function prom(id){
-      var v = ESTUDIANTES.map(function(e){ return e.resultados[id]; })
-        .filter(function(r){ return r && r.paes != null; })
-        .map(function(r){ return r.paes; });
-      if(!v.length) return null;
-      return Math.round(v.reduce(function(a,b){ return a+b; },0) / v.length);
-    }
-
-    var datos = [
-      {label:"Estudiantes registrados", valor:ESTUDIANTES.length, sub:"en ambos ensayos"},
-      {label:"Con las dos pruebas", valor:conAmbas, sub:"resultados comparables"},
-      {label:"Prom. PAES 29 sept.", valor:fmt(prom("sep29")), sub:"todos los cursos"},
-      {label:"Prom. PAES 7 oct.", valor:fmt(prom("oct07")), sub:"todos los cursos"}
-    ];
-
-    document.getElementById("stats").innerHTML = datos.map(function(d){
-      return '<div class="stat">' +
-        '<div class="label">' + d.label + "</div>" +
-        '<div class="valor">' + d.valor + "</div>" +
-        '<div class="sub">' + d.sub + "</div>" +
-      "</div>";
-    }).join("");
+  /* ===== SESIÓN ===== */
+  function guardarSesion(user){
+    try{ sessionStorage.setItem(SESSION_KEY, user); }catch(e){}
+  }
+  function obtenerSesion(){
+    try{ return sessionStorage.getItem(SESSION_KEY); }catch(e){ return null; }
+  }
+  function borrarSesion(){
+    try{ sessionStorage.removeItem(SESSION_KEY); }catch(e){}
+  }
+  function actualizarUserDisplay(){
+    var u = obtenerSesion();
+    var el = document.getElementById("user-display");
+    if(el) el.textContent = u ? u : "—";
   }
 
-  /* ===== RENDER BÚSQUEDA ===== */
-  function listaFiltrada(){
-    var q = norm(document.getElementById("busqueda").value);
-    var curso = document.getElementById("filtroCurso").value;
-    var tokens = q.split(" ").filter(Boolean);
+  /* ===== NAVEGACIÓN ===== */
+  function showView(id){
+    var vistas = document.querySelectorAll(".view");
+    for(var i = 0; i < vistas.length; i++) vistas[i].classList.remove("active");
+    var target = document.getElementById(id);
+    if(target) target.classList.add("active");
+    window.scrollTo(0, 0);
+  }
 
-    return ESTUDIANTES.filter(function(e){
-      if(curso && e.curso !== curso) return false;
-      if(!tokens.length) return true;
-      for(var i = 0; i < tokens.length; i++){
-        if(e.busqueda.indexOf(tokens[i]) === -1) return false;
-      }
-      return true;
+  document.getElementById("btn-docente").addEventListener("click", function(){
+    // Si ya hay sesión activa, va directo al panel
+    if(obtenerSesion()){
+      actualizarUserDisplay();
+      showView("view-docente");
+      setTimeout(dibujarTodos, 80);
+      return;
+    }
+    // Si no, mostrar login
+    var m = document.getElementById("login-msg");
+    m.className = "msg"; m.textContent = "";
+    document.getElementById("form-login").reset();
+    showView("view-login");
+    setTimeout(function(){ document.getElementById("login-user").focus(); }, 100);
+  });
+
+  document.getElementById("btn-estudiante").addEventListener("click", function(){
+    showView("view-estudiante");
+    setTimeout(function(){ var inp = document.getElementById("input-rut"); if(inp) inp.focus(); }, 100);
+  });
+
+  /* Botones volver genéricos (landing y estudiante) */
+  var botonesVolver = document.querySelectorAll("[data-volver]");
+  for(var bv = 0; bv < botonesVolver.length; bv++){
+    botonesVolver[bv].addEventListener("click", function(){
+      showView("landing");
+      var inp = document.getElementById("input-rut");
+      if(inp) inp.value = "";
+      var res = document.getElementById("resultado-estudiante");
+      if(res) res.innerHTML = "";
+      var m = document.getElementById("msg-rut");
+      if(m){ m.className = "msg"; m.textContent = ""; }
     });
   }
 
-  function renderTabla(){
-    var lista = listaFiltrada();
-    var tb = document.getElementById("tbodyResultados");
-    var cont = document.getElementById("contador");
+  /* Botón "Volver al inicio" del header de docente */
+  document.getElementById("btn-volver-docente").addEventListener("click", function(){
+    showView("landing");
+  });
 
-    cont.textContent = (lista.length === ESTUDIANTES.length)
-      ? "Mostrando los " + lista.length + " estudiantes registrados."
-      : lista.length + " " + (lista.length === 1 ? "estudiante encontrado" : "estudiantes encontrados") + ".";
+  /* ===== LOGIN ===== */
+  document.getElementById("form-login").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var user = document.getElementById("login-user").value.trim().toLowerCase();
+    var pass = document.getElementById("login-pass").value.trim();
+    var m = document.getElementById("login-msg");
 
-    if(!lista.length){
-      tb.innerHTML = '<tr><td colspan="7" class="vacio">No se encontraron estudiantes con ese nombre.</td></tr>';
+    if(!user || !pass){
+      m.className = "msg visible error";
+      m.innerHTML = "⚠️ Ingresa tu usuario y contraseña.";
+      return;
+    }
+    if(!/^\d{4}$/.test(pass)){
+      m.className = "msg visible error";
+      m.innerHTML = "🔢 La contraseña debe tener exactamente 4 dígitos.";
+      return;
+    }
+    if(!CREDENCIALES[user]){
+      m.className = "msg visible error";
+      m.innerHTML = "❌ Usuario no reconocido.<br><small>Verifica que esté escrito tal como te lo entregaron.</small>";
+      return;
+    }
+    if(CREDENCIALES[user] !== pass){
+      m.className = "msg visible error";
+      m.innerHTML = "🔒 Contraseña incorrecta.<br><small>Vuelve a intentarlo.</small>";
+      document.getElementById("login-pass").value = "";
+      document.getElementById("login-pass").focus();
       return;
     }
 
+    // Login exitoso
+    guardarSesion(user);
+    m.className = "msg visible success";
+    m.innerHTML = "✅ ¡Bienvenido/a, <b>" + user + "</b>!";
+    actualizarUserDisplay();
+    setTimeout(function(){
+      showView("view-docente");
+      setTimeout(dibujarTodos, 80);
+    }, 450);
+  });
+
+  /* Solo permitir dígitos en el campo de contraseña */
+  document.getElementById("login-pass").addEventListener("input", function(){
+    this.value = this.value.replace(/\D/g, "").slice(0, 4);
+  });
+
+  /* ===== FAB (globo flotante) ===== */
+  var fabContainer = document.getElementById("fab-container");
+  var fabBtn = document.getElementById("fab-btn");
+  var fabMenu = document.getElementById("fab-menu");
+
+  fabBtn.addEventListener("click", function(ev){
+    ev.stopPropagation();
+    fabContainer.classList.toggle("open");
+  });
+
+  // Cerrar el menú al hacer clic fuera
+  document.addEventListener("click", function(ev){
+    if(!fabContainer.contains(ev.target)){
+      fabContainer.classList.remove("open");
+    }
+  });
+
+  // Botones del FAB para cambiar de pestaña
+  var fabTabBtns = fabMenu.querySelectorAll("[data-fab-tab]");
+  for(var ft = 0; ft < fabTabBtns.length; ft++){
+    fabTabBtns[ft].addEventListener("click", function(){
+      var id = this.getAttribute("data-fab-tab");
+      activarTab(id);
+      fabContainer.classList.remove("open");
+    });
+  }
+
+  // Cerrar sesión desde FAB
+  document.getElementById("fab-logout").addEventListener("click", function(){
+    borrarSesion();
+    fabContainer.classList.remove("open");
+    actualizarUserDisplay();
+    showView("landing");
+  });
+
+  // Volver al inicio desde FAB (sin cerrar sesión)
+  document.getElementById("fab-inicio").addEventListener("click", function(){
+    fabContainer.classList.remove("open");
+    showView("landing");
+  });
+
+  // Cerrar el FAB al cambiar de vista desde cualquier lado
+  function cerrarFab(){ fabContainer.classList.remove("open"); }
+
+  /* ===== TABS (unificado para tabs de arriba y FAB) ===== */
+  var tabBtns = document.querySelectorAll(".tabs .tab-btn");
+  function activarTab(id){
+    // Actualizar tabs de arriba
+    for(var k = 0; k < tabBtns.length; k++){
+      tabBtns[k].classList.toggle("active", tabBtns[k].getAttribute("data-tab") === id);
+    }
+    // Actualizar botones del FAB
+    for(var f = 0; f < fabTabBtns.length; f++){
+      fabTabBtns[f].classList.toggle("active", fabTabBtns[f].getAttribute("data-fab-tab") === id);
+    }
+    // Paneles
+    var paneles = document.querySelectorAll(".tab-panel");
+    for(var p = 0; p < paneles.length; p++) paneles[p].classList.remove("active");
+    var panel = document.getElementById("tab-" + id);
+    if(panel) panel.classList.add("active");
+    if(id === "graficos") setTimeout(dibujarTodos, 50);
+  }
+
+  for(var t = 0; t < tabBtns.length; t++){
+    tabBtns[t].addEventListener("click", function(){
+      activarTab(this.getAttribute("data-tab"));
+      cerrarFab();
+    });
+  }
+
+  /* ===== RENDER TABLAS ===== */
+  function renderTablaCurso(prefijo, curso){
+    var input = document.getElementById("busqueda-" + prefijo);
+    var q = norm(input.value);
+    var tokens = q.split(" ").filter(Boolean);
+    var qRut = normalizarRut(input.value);
+    var lista = ESTUDIANTES.filter(function(e){
+      if(e.curso !== curso) return false;
+      if(!tokens.length) return true;
+      var coincideNombre = tokens.every(function(t){ return e.busqueda.indexOf(t) !== -1; });
+      if(coincideNombre) return true;
+      if(qRut.length >= 2 && e.rutKey.indexOf(qRut) !== -1) return true;
+      return false;
+    });
+    var tb = document.getElementById("tbody-" + prefijo);
+    var cont = document.getElementById("contador-" + prefijo);
+    var total = ESTUDIANTES.filter(function(e){ return e.curso === curso; }).length;
+    cont.textContent = (lista.length === total)
+      ? "Mostrando los " + lista.length + " estudiantes registrados en " + curso + "."
+      : lista.length + " " + (lista.length === 1 ? "estudiante encontrado" : "estudiantes encontrados") + " en " + curso + ".";
+    if(!lista.length){
+      tb.innerHTML = '<tr><td colspan="7" class="vacio">No se encontraron estudiantes con ese criterio.</td></tr>';
+      return;
+    }
     tb.innerHTML = lista.map(function(e){
       var r1 = e.resultados.sep29;
       var r2 = e.resultados.oct07;
-
-      var d = (r1 && r2 && r1.paes != null && r2.paes != null)
-        ? r2.paes - r1.paes : null;
-
-      var claseCurso = /A$/.test(e.curso) ? "" : " b";
-
+      var d = (r1 && r2 && r1.paes != null && r2.paes != null) ? r2.paes - r1.paes : null;
       return "<tr>" +
         '<td class="nombre">' + e.nombre + "</td>" +
-        '<td><span class="curso' + claseCurso + '">' + e.curso + "</span></td>" +
+        '<td class="rut">' + e.rut + "</td>" +
         '<td class="num">' + (r1 && r1.correctas != null ? r1.correctas : '<span class="nd">—</span>') + "</td>" +
         '<td class="num">' + (r1 && r1.paes != null ? badge(r1.paes) : '<span class="nd">—</span>') + "</td>" +
         '<td class="num">' + (r2 && r2.correctas != null ? r2.correctas : '<span class="nd">—</span>') + "</td>" +
@@ -499,121 +1136,399 @@
     }).join("");
   }
 
-  /* ===== RENDER PROMEDIOS ===== */
-  function calcularGrupo(curso, ensayoId){
-    var vals = ESTUDIANTES.filter(function(e){
-      return !curso || e.curso === curso;
-    }).map(function(e){
+  /* ===== ESTADÍSTICAS ===== */
+  function valsDeGrupo(filtro, ensayoId){
+    return ESTUDIANTES.filter(filtro).map(function(e){
       return e.resultados[ensayoId];
-    }).filter(function(r){
-      return r && r.correctas != null;
+    }).filter(function(r){ return r && r.correctas != null; }).map(function(r){ return r.paes; });
+  }
+  function calcEstadisticas(vals){
+    if(!vals.length) return null;
+    var n = vals.length;
+    var suma = vals.reduce(function(a,b){ return a+b; },0);
+    var prom = suma / n;
+    var max = Math.max.apply(null, vals);
+    var min = Math.min.apply(null, vals);
+    var ds = desviacionEst(vals);
+    return { n:n, prom:prom, max:max, min:min, ds:ds };
+  }
+  function filaStats(nombreGrupo, s, claseFila){
+    if(!s){
+      return '<tr class="' + (claseFila||'') + '"><td>' + nombreGrupo + '</td>' +
+        '<td class="num">0</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>';
+    }
+    return '<tr class="' + (claseFila||'') + '">' +
+      '<td>' + nombreGrupo + '</td>' +
+      '<td class="num">' + s.n + '</td>' +
+      '<td class="num valor-destacado">' + Math.round(s.prom) + '</td>' +
+      '<td class="num">' + fmt(s.max) + '</td>' +
+      '<td class="num">' + fmt(s.min) + '</td>' +
+      '<td class="num">' + (s.ds == null ? "—" : s.ds.toFixed(1)) + '</td>' +
+    '</tr>';
+  }
+  function renderEstadisticas(){
+    var fIVA = function(e){ return e.curso === "IV° medio A"; };
+    var fIVB = function(e){ return e.curso === "IV° medio B"; };
+    var fGen = function(e){ return e.curso === "IV° medio A" || e.curso === "IV° medio B"; };
+    var html = "";
+    html += '<div class="card with-logo" style="margin-bottom:1.3rem;">' +
+      '<img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">' +
+      '<h2><span class="num">📊</span> Estadísticas descriptivas por ensayo</h2>' +
+      '<p class="desc">Promedios, puntajes máximos y mínimos, y desviación estándar (muestral) del puntaje PAES, calculados por curso y por generación (IVA + IVB juntos).</p>' +
+    '</div>';
+    ENSAYOS.forEach(function(ens){
+      var sIVA = calcEstadisticas(valsDeGrupo(fIVA, ens.id));
+      var sIVB = calcEstadisticas(valsDeGrupo(fIVB, ens.id));
+      var sGen = calcEstadisticas(valsDeGrupo(fGen, ens.id));
+      html += '<div class="stats-block with-logo">' +
+        '<img class="card-corner-logo" src="logo-colegio.jpg" alt="Colegio SSCC Providencia">' +
+        '<h3><span class="emoji">🧪</span> ' + ens.titulo + '</h3>' +
+        '<table>' +
+          '<thead><tr>' +
+            '<th>Grupo</th>' +
+            '<th class="num">N</th>' +
+            '<th class="num">Promedio PAES</th>' +
+            '<th class="num">Máximo</th>' +
+            '<th class="num">Mínimo</th>' +
+            '<th class="num">Desv. Estándar</th>' +
+          '</tr></thead>' +
+          '<tbody>' +
+            filaStats('IV° medio A', sIVA) +
+            filaStats('IV° medio B', sIVB) +
+            filaStats('Generación (IVA + IVB)', sGen, 'fila-generacion') +
+          '</tbody>' +
+        '</table>' +
+      '</div>';
     });
-
-    if(!vals.length) return {n:0, promC:null, promP:null, max:null, min:null};
-
-    var cs = vals.map(function(v){ return v.correctas; });
-    var ps = vals.map(function(v){ return v.paes; });
-
-    return {
-      n: vals.length,
-      promC: cs.reduce(function(a,b){ return a+b; },0) / cs.length,
-      promP: ps.reduce(function(a,b){ return a+b; },0) / ps.length,
-      max: Math.max.apply(null, ps),
-      min: Math.min.apply(null, ps)
-    };
+    document.getElementById("stats-body").innerHTML = html;
   }
 
-  function renderPromedios(){
-    var cursosMap = {};
-    ESTUDIANTES.forEach(function(e){ cursosMap[e.curso] = true; });
-    var cursos = Object.keys(cursosMap).sort();
-
-    document.getElementById("promedios").innerHTML = ENSAYOS.map(function(ens, idx){
-      var filas = cursos.map(function(c){
-        var g = calcularGrupo(c, ens.id);
-        g.curso = c;
-        return g;
-      });
-      var gen = calcularGrupo(null, ens.id);
-      gen.curso = "General";
-      filas.push(gen);
-
-      var cuerpo = filas.map(function(f){
-        var clase = f.curso === "General" ? "fila-general" : "";
-        return '<tr class="' + clase + '">' +
-          "<td>" + f.curso + "</td>" +
-          '<td class="num">' + f.n + "</td>" +
-          '<td class="num">' + (f.promC == null ? "—" : f.promC.toFixed(1)) + "</td>" +
-          '<td class="num">' + (f.promP == null ? "—" : badge(Math.round(f.promP))) + "</td>" +
-          '<td class="num">' + (f.max == null ? "—" : fmt(f.max)) + "</td>" +
-          '<td class="num">' + (f.min == null ? "—" : fmt(f.min)) + "</td>" +
-        "</tr>";
-      }).join("");
-
-      var nota = "";
-      if(idx > 0){
-        var prev = ENSAYOS[idx - 1];
-        var partes = cursos.map(function(c){
-          var a = calcularGrupo(c, prev.id).promP;
-          var b = calcularGrupo(c, ens.id).promP;
-          if(a == null || b == null) return null;
-          var d = Math.round(b - a);
-          var signo = d > 0 ? "+" : "";
-          return c.replace("IV° medio ", "") + ": " + signo + d + " pts";
-        }).filter(Boolean);
-        if(partes.length){
-          nota = '<p class="nota">Variación de promedio PAES respecto al ensayo anterior → ' + partes.join(" · ") + "</p>";
-        }
-      }
-
-      return '<div class="prom-card">' +
-        "<h3>" + ens.titulo + "</h3>" +
-        "<table>" +
-          "<thead><tr>" +
-            "<th>Curso</th><th class=\"num\">Alumnos</th><th class=\"num\">Prom. correctas</th>" +
-            "<th class=\"num\">Prom. PAES</th><th class=\"num\">Mejor</th><th class=\"num\">Más bajo</th>" +
-          "</tr></thead>" +
-          "<tbody>" + cuerpo + "</tbody>" +
-        "</table>" +
-        nota +
-      "</div>";
-    }).join("");
-  }
-
-  /* ===== RENDER CONVERSIÓN ===== */
   function renderConversion(){
     document.getElementById("tablaConversion").innerHTML = TABLA_PAES.map(function(p, i){
-      return '<div class="conv-item">' +
-        '<span class="conv-c">' + i + " correctas</span>" +
-        '<span class="conv-p">' + fmt(p) + "</span>" +
-      "</div>";
+      return '<div class="conv-item"><span class="conv-c">' + i + ' correctas</span><span class="conv-p">' + fmt(p) + '</span></div>';
     }).join("");
   }
+
+  /* ===== GRÁFICOS ===== */
+  function contarPorIntervalo(estudiantes, ensayoId){
+    var counts = INTERVALOS.map(function(){ return 0; });
+    estudiantes.forEach(function(e){
+      var r = e.resultados[ensayoId];
+      if(r && r.paes != null){
+        for(var i = 0; i < INTERVALOS.length; i++){
+          if(r.paes >= INTERVALOS[i].min && r.paes <= INTERVALOS[i].max){
+            counts[i]++; break;
+          }
+        }
+      }
+    });
+    return counts;
+  }
+
+  function dibujarLineas(canvas, estudiantes, opciones){
+    if(!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "#fbfdff";
+    ctx.fillRect(0, 0, W, H);
+
+    var ml = 65, mr = 30, mt = 45, mb = 105;
+    var plotW = W - ml - mr;
+    var plotH = H - mt - mb;
+
+    var c1 = contarPorIntervalo(estudiantes, "sep29");
+    var c2 = contarPorIntervalo(estudiantes, "oct07");
+
+    var maxY = Math.max(1, Math.max.apply(null, c1.concat(c2)));
+    var stepY = 1;
+    if(maxY > 4 && maxY <= 10) stepY = 2;
+    else if(maxY > 10) stepY = 5;
+    var yMax = Math.max(stepY, Math.ceil(maxY / stepY) * stepY);
+
+    var N = INTERVALOS.length;
+    function mapX(i){ return ml + (N > 1 ? (i * plotW / (N - 1)) : plotW/2); }
+    function mapY(v){ return mt + plotH - (v / yMax) * plotH; }
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(ml, mt, plotW, plotH);
+
+    ctx.strokeStyle = "#eef2f7";
+    ctx.lineWidth = 1;
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "11px -apple-system, sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for(var yv = 0; yv <= yMax; yv += stepY){
+      var yy = mapY(yv);
+      ctx.beginPath();
+      ctx.moveTo(ml, yy);
+      ctx.lineTo(ml + plotW, yy);
+      ctx.stroke();
+      ctx.fillText(String(yv), ml - 8, yy);
+    }
+
+    ctx.strokeStyle = "#f1f5f9";
+    for(var gx = 0; gx < N; gx++){
+      var xxg = mapX(gx);
+      ctx.beginPath();
+      ctx.moveTo(xxg, mt);
+      ctx.lineTo(xxg, mt + plotH);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(ml, mt);
+    ctx.lineTo(ml, mt + plotH);
+    ctx.lineTo(ml + plotW, mt + plotH);
+    ctx.stroke();
+
+    ctx.save();
+    ctx.fillStyle = "#475569";
+    ctx.font = "600 10px -apple-system, sans-serif";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for(var ix = 0; ix < N; ix++){
+      var xx2 = mapX(ix);
+      ctx.save();
+      ctx.translate(xx2 - 3, mt + plotH + 8);
+      ctx.rotate(-Math.PI/3);
+      ctx.fillText(INTERVALOS[ix].label, 0, 0);
+      ctx.restore();
+    }
+    ctx.restore();
+
+    ctx.save();
+    ctx.translate(18, mt + plotH/2);
+    ctx.rotate(-Math.PI/2);
+    ctx.fillStyle = "#475569";
+    ctx.font = "700 12px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText("N° de estudiantes", 0, 0);
+    ctx.restore();
+
+    ctx.fillStyle = "#475569";
+    ctx.font = "700 12px -apple-system, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText("Rango de puntaje PAES", ml + plotW/2, mt + plotH + 78);
+
+    function drawSerie(counts, color){
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2.5;
+      ctx.setLineDash([6, 4]);
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      for(var i = 0; i < N; i++){
+        var x = mapX(i);
+        var y = mapY(counts[i]);
+        if(i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.restore();
+
+      for(var j = 0; j < N; j++){
+        var x2 = mapX(j);
+        var y2 = mapY(counts[j]);
+        var r = counts[j] > 0 ? 6 : 4;
+        ctx.beginPath();
+        ctx.arc(x2, y2, r, 0, Math.PI*2);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+        if(counts[j] > 0){
+          ctx.fillStyle = "#fff";
+          ctx.font = "700 9px -apple-system, sans-serif";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(String(counts[j]), x2, y2 + .5);
+        }
+      }
+    }
+
+    drawSerie(c1, "#2C4270");
+    drawSerie(c2, "#C8102E");
+
+    if(opciones && opciones.titulo){
+      ctx.fillStyle = "#1B2A4A";
+      ctx.font = "700 13px -apple-system, sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText(opciones.titulo, ml, 12);
+    }
+  }
+
+  function dibujarTodos(){
+    var iva = ESTUDIANTES.filter(function(e){ return e.curso === "IV° medio A"; });
+    var ivb = ESTUDIANTES.filter(function(e){ return e.curso === "IV° medio B"; });
+    var todos = ESTUDIANTES.slice();
+    dibujarLineas(document.getElementById("canvas-iva"), iva, {titulo: "IV° Medio A · n=" + iva.length});
+    dibujarLineas(document.getElementById("canvas-ivb"), ivb, {titulo: "IV° Medio B · n=" + ivb.length});
+    dibujarLineas(document.getElementById("canvas-todos"), todos, {titulo: "Generación completa (IVA + IVB) · n=" + todos.length});
+  }
+
+  /* ===== ESTUDIANTE ===== */
+  function mostrarMensaje(tipo, texto){
+    var m = document.getElementById("msg-rut");
+    m.className = "msg visible " + tipo;
+    m.innerHTML = texto;
+  }
+  function ocultarMensaje(){
+    var m = document.getElementById("msg-rut");
+    m.className = "msg"; m.innerHTML = "";
+  }
+  function renderResultadoEstudiante(est){
+    var cont = document.getElementById("resultado-estudiante");
+    var r1 = est.resultados.sep29;
+    var r2 = est.resultados.oct07;
+    function promCurso(ensayoId){
+      var vals = ESTUDIANTES.filter(function(e){ return e.curso === est.curso; })
+        .map(function(e){ return e.resultados[ensayoId]; })
+        .filter(function(r){ return r && r.paes != null; })
+        .map(function(r){ return r.paes; });
+      if(!vals.length) return null;
+      return Math.round(vals.reduce(function(a,b){ return a+b; },0) / vals.length);
+    }
+    function bloqueExamen(titulo, r, promC){
+      if(!r || r.paes == null){
+        return '<div class="res-exam nd">' +
+          '<div class="exam-title">' + titulo + '</div>' +
+          '<div class="num-grande">—</div>' +
+          '<div class="num-sub">Sin registro</div>' +
+          '<div class="paes-line"><span class="lbl">PAES</span><span class="nd">—</span></div>' +
+        '</div>';
+      }
+      var clasePaes = r.paes >= 800 ? "p-alto" : r.paes >= 650 ? "p-medio-alto" : r.paes >= 500 ? "p-medio" : "p-bajo";
+      var dif = promC != null ? (r.paes - promC) : null;
+      var difTxt = "";
+      if(dif != null){
+        if(dif > 0) difTxt = '<span class="num-sub" style="color:#15803d;font-weight:700;">+' + dif + " vs. promedio del curso</span>";
+        else if(dif < 0) difTxt = '<span class="num-sub" style="color:#C8102E;font-weight:700;">' + dif + " vs. promedio del curso</span>";
+        else difTxt = '<span class="num-sub">Igual al promedio del curso</span>';
+      }
+      return '<div class="res-exam">' +
+        '<div class="exam-title">' + titulo + '</div>' +
+        '<div class="num-grande">' + r.correctas + '</div>' +
+        '<div class="num-sub">respuestas correctas</div>' +
+        '<div class="paes-line">' +
+          '<span class="lbl">PAES</span>' +
+          '<span class="paes-big ' + clasePaes + '">' + fmt(r.paes) + '</span>' +
+        '</div>' + difTxt +
+      '</div>';
+    }
+    var deltaBlock = "";
+    if(r1 && r1.paes != null && r2 && r2.paes != null){
+      var d = r2.paes - r1.paes;
+      var clase = d > 0 ? "up" : d < 0 ? "down" : "eq";
+      var flecha = d > 0 ? "▲" : d < 0 ? "▼" : "=";
+      var signo = d > 0 ? "+" : "";
+      deltaBlock = '<div class="res-delta">' +
+        '<span class="lbl">Variación entre ensayos</span>' +
+        '<span class="val ' + clase + '">' + flecha + " " + signo + d + " pts</span>" +
+        '<span class="ctx">Del 29 sept. al 7 oct.</span>' +
+      '</div>';
+    } else {
+      deltaBlock = '<div class="res-delta">' +
+        '<span class="lbl">Variación entre ensayos</span>' +
+        '<span class="val eq">—</span>' +
+        '<span class="ctx">No hay resultados en ambas pruebas</span>' +
+      '</div>';
+    }
+    var prom1 = promCurso("sep29");
+    var prom2 = promCurso("oct07");
+    cont.innerHTML =
+      '<div class="res-card">' +
+        '<div class="res-head">' +
+          '<div class="eyebrow">Resultado individual</div>' +
+          '<h3>' + est.nombre + '</h3>' +
+          '<div class="meta">' +
+            '<span class="chip">' + est.rut + '</span>' +
+            '<span>' + est.curso + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="res-body">' +
+          '<div class="res-grid">' +
+            bloqueExamen("Ensayo · 29 de septiembre", r1, prom1) +
+            bloqueExamen("Ensayo · 7 de octubre", r2, prom2) +
+          '</div>' +
+          deltaBlock +
+          '<div class="res-footer">Los puntajes PAES se calculan a partir de la tabla oficial de conversión por respuestas correctas.</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  document.getElementById("form-rut").addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var valor = document.getElementById("input-rut").value.trim();
+    if(!valor){ mostrarMensaje("error", "⚠️ Por favor ingresa tu RUT."); document.getElementById("resultado-estudiante").innerHTML = ""; return; }
+    if(!validarRut(valor)){ mostrarMensaje("error", "❌ El RUT ingresado no es válido.<br><small>Ejemplo válido: <b>22.704.214-1</b></small>"); document.getElementById("resultado-estudiante").innerHTML = ""; return; }
+    var clave = normalizarRut(valor);
+    var est = INDICE_RUT[clave];
+    if(!est){ mostrarMensaje("error", "🔍 No encontramos resultados asociados a ese RUT en los ensayos de IV° medio A o B."); document.getElementById("resultado-estudiante").innerHTML = ""; return; }
+    ocultarMensaje();
+    renderResultadoEstudiante(est);
+    setTimeout(function(){
+      var rc = document.querySelector(".res-card");
+      if(rc && rc.scrollIntoView) rc.scrollIntoView({behavior:"smooth", block:"start"});
+    }, 80);
+  });
+
+  var inputRut = document.getElementById("input-rut");
+  inputRut.addEventListener("input", function(){
+    var v = inputRut.value.replace(/[^0-9kK]/g,"");
+    if(v.length > 1){
+      var cuerpo = v.slice(0, -1);
+      var dv = v.slice(-1).toUpperCase();
+      cuerpo = cuerpo.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      inputRut.value = cuerpo + "-" + dv;
+    }
+    ocultarMensaje();
+  });
 
   /* ===== INIT ===== */
   function init(){
-    renderStats();
-    renderPromedios();
     renderConversion();
-    renderTabla();
+    renderTablaCurso("iva", "IV° medio A");
+    renderTablaCurso("ivb", "IV° medio B");
+    renderEstadisticas();
+    actualizarUserDisplay();
 
-    var input = document.getElementById("busqueda");
-    var limpiar = document.getElementById("limpiar");
-
-    input.addEventListener("input", function(){
-      if(input.value.length > 0) limpiar.classList.add("visible");
-      else limpiar.classList.remove("visible");
-      renderTabla();
+    ["iva", "ivb"].forEach(function(pre){
+      var inp = document.getElementById("busqueda-" + pre);
+      var btn = document.querySelector('[data-limpiar="' + pre + '"]');
+      var curso = pre === "iva" ? "IV° medio A" : "IV° medio B";
+      inp.addEventListener("input", function(){
+        if(inp.value.length > 0) btn.classList.add("visible");
+        else btn.classList.remove("visible");
+        renderTablaCurso(pre, curso);
+      });
+      btn.addEventListener("click", function(){
+        inp.value = "";
+        btn.classList.remove("visible");
+        inp.focus();
+        renderTablaCurso(pre, curso);
+      });
     });
 
-    limpiar.addEventListener("click", function(){
-      input.value = "";
-      limpiar.classList.remove("visible");
-      input.focus();
-      renderTabla();
+    var timeoutResize = null;
+    window.addEventListener("resize", function(){
+      if(timeoutResize) clearTimeout(timeoutResize);
+      timeoutResize = setTimeout(function(){
+        var graf = document.getElementById("tab-graficos");
+        if(graf && graf.classList.contains("active")) dibujarTodos();
+      }, 180);
     });
 
-    document.getElementById("filtroCurso").addEventListener("change", renderTabla);
+    setTimeout(function(){
+      var graf = document.getElementById("tab-graficos");
+      if(graf && graf.classList.contains("active")) dibujarTodos();
+    }, 200);
   }
 
   if(document.readyState === "loading"){
